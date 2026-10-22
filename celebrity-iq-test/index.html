@@ -1,1 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebrity IQ Test · 15 questions, checked answers</title>
+<meta name="description" content="Fifteen questions, three answers each, one correct. Every fact comes with an explanation, a source and the date it was checked. No account, no upload, works offline.">
+<meta name="theme-color" content="#f6f3ec">
+<meta property="og:title" content="Celebrity IQ Test · 15 questions, checked answers">
+<meta property="og:description" content="Fifteen questions, three answers each, one correct. Every fact comes with an explanation, a source and the date it was checked.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<style>
+:root{
+  --bg:#f6f3ec; --panel:#ffffff; --panel2:#f1ecdf; --text:#241f33; --muted:#6f687f;
+  --accent:#6d28d9; --accent2:#8b2fd6; --gold:#946a00; --goldline:#e3c05a; --ring:#e3c05a;
+  --ok:#1a7f42; --okbg:#e9f5ee; --bad:#b3261e; --badbg:#fdecea;
+  --line:#e8e0d0; --shadow:0 1px 2px rgba(36,31,51,.05),0 14px 38px rgba(36,31,51,.10);
+  --hero-a:#5b21b6; --hero-b:#7127d0; --hero-c:#38104f;
+}
+[data-theme="dark"]{
+  --bg:#131020; --panel:#1d1930; --panel2:#282146; --text:#ece9f7; --muted:#a79ec4;
+  --accent:#a78bfa; --accent2:#c4a5ff; --gold:#ffd766; --goldline:#8a6d1a; --ring:#8a6d1a;
+  --ok:#71d69c; --okbg:#163327; --bad:#ff9189; --badbg:#3a1f1e;
+  --line:#3a3160; --shadow:0 1px 2px rgba(0,0,0,.45),0 22px 52px rgba(0,0,0,.42);
+  --hero-a:#46189c; --hero-b:#6d28d9; --hero-c:#26094a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+::selection{background:var(--accent);color:#fff}
+body{
+  font-family:'Segoe UI',Inter,system-ui,-apple-system,'Noto Sans',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;
+  background-image:radial-gradient(620px 420px at 8% 95%,rgba(109,40,217,.07),transparent 60%),
+                   radial-gradient(700px 420px at 95% 5%,rgba(212,164,23,.09),transparent 60%);
+  padding:16px;display:flex;flex-direction:column;align-items:center;
+}
+.wrap{width:100%;max-width:860px;margin:0 auto;display:flex;flex-direction:column;min-height:calc(100vh - 32px)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:4px 2px}
+.langs{display:flex;gap:5px;flex-wrap:wrap}
+.langbtn,.iconbtn{
+  font:inherit;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.03em;
+  background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.15s;min-height:34px
+}
+.langbtn{border-radius:999px;padding:6px 13px}
+.iconbtn{border-radius:50%;width:36px;height:36px;padding:0;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.langbtn:hover,.iconbtn:hover{color:var(--text);border-color:var(--accent)}
+.langbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:8px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow);overflow:hidden;margin:12px 0;flex:1;display:flex;flex-direction:column;
+}
+header.hero{
+  background:
+    radial-gradient(560px 240px at 88% -20%,rgba(255,215,0,.20),transparent 62%),
+    radial-gradient(420px 200px at 0% 120%,rgba(56,16,79,.55),transparent 60%),
+    linear-gradient(140deg,var(--hero-a) 0%,var(--hero-b) 52%,var(--hero-c) 100%);
+  color:#fff;text-align:center;padding:clamp(36px,7vw,56px) 24px clamp(30px,5vw,42px);
+}
+h1{
+  font-size:clamp(1.75rem,5.6vw,2.9rem);font-weight:900;letter-spacing:-.02em;line-height:1.08;
+  background:linear-gradient(120deg,#ffe082 0%,#ffd766 35%,#fff 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.22));
+}
+.hero .lede{font-size:clamp(.95rem,2.6vw,1.12rem);opacity:.94;max-width:540px;margin:14px auto 0;line-height:1.6;font-weight:300}
+main{padding:clamp(18px,4vw,42px);flex:1;display:flex;flex-direction:column}
+.page{display:none;animation:fade .35s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+h2{font-size:clamp(1.2rem,3.4vw,1.55rem);margin-bottom:14px;line-height:1.3;letter-spacing:-.01em}
+.pillrow{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 20px}
+.pill{font-size:.77rem;font-weight:700;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.pill b{color:var(--gold);font-weight:800}
+.howto{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 20px;margin:4px 0 24px}
+.howto ul{list-style:none}
+.howto li{margin:10px 0;padding-left:26px;position:relative;line-height:1.55;font-size:.95rem}
+.howto li::before{content:"\2726";position:absolute;left:4px;color:var(--gold);font-size:.8rem;top:2px}
+.field{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 8px}
+.field input{
+  flex:1;min-width:200px;font:inherit;font-size:1.02rem;padding:13px 16px;border-radius:12px;
+  border:1.5px solid var(--line);background:var(--panel);color:var(--text);transition:border-color .15s
+}
+.field input:focus{outline:none;border-color:var(--accent)}
+.cta{
+  font:inherit;font-size:1.04rem;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border:none;border-radius:13px;padding:15px 28px;cursor:pointer;width:100%;
+  box-shadow:0 8px 22px rgba(109,40,217,.32);transition:transform .12s,box-shadow .12s,filter .12s
+}
+.cta:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(109,40,217,.38);filter:brightness(1.05)}
+.cta:active{transform:translateY(0)}
+.cta.ghost{background:var(--panel2);color:var(--text);border:1px solid var(--line);box-shadow:none;font-weight:700}
+.cta.ghost:hover{border-color:var(--accent);box-shadow:none;filter:none}
+.progress{height:8px;background:var(--panel2);border-radius:99px;overflow:hidden;margin:2px 0 8px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--goldline));border-radius:99px;transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.qmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.84rem;color:var(--muted);font-weight:700;margin-bottom:10px;flex-wrap:wrap}
+.qmeta .pill{margin:0}
+.qtext{font-size:clamp(1.1rem,3.4vw,1.42rem);font-weight:800;line-height:1.35;margin:4px 0 20px;letter-spacing:-.01em}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{
+  display:block;width:100%;text-align:left;font:inherit;font-size:1rem;color:var(--text);
+  background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;
+  transition:border-color .15s,background .15s,transform .12s,box-shadow .15s;min-height:56px;
+  animation:optIn .3s cubic-bezier(.2,.7,.3,1) both
+}
+.opt:nth-child(2){animation-delay:.07s}
+.opt:nth-child(3){animation-delay:.14s}
+@keyframes optIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px);box-shadow:0 6px 16px rgba(36,31,51,.08)}
+.opt .ol{display:flex;align-items:center;gap:12px;font-weight:700}
+.opt .ol .k{
+  flex:0 0 30px;height:30px;border-radius:10px;background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:var(--accent);
+  border:1px solid var(--line)
+}
+.opt .mark{
+  margin-left:auto;flex:0 0 24px;height:24px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;color:#fff
+}
+.opt .note{display:none;margin:10px 12px 2px 42px;font-size:.9rem;line-height:1.55;color:var(--muted);font-weight:400}
+.quizlock .opt{cursor:default}
+.quizlock .opt:disabled{opacity:1}
+.quizlock .opt.right{border-color:var(--ok);background:var(--okbg)}
+.quizlock .opt.right .k{background:var(--ok);border-color:var(--ok);color:#fff}
+.quizlock .opt.right .mark{display:flex;background:var(--ok)}
+.quizlock .opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.quizlock .opt.wrong .k{background:var(--bad);border-color:var(--bad);color:#fff}
+.quizlock .opt.wrong .mark{display:flex;background:var(--bad)}
+.quizlock .opt.right .note,.quizlock .opt.wrong .note{display:block}
+.srcline{display:none;margin:16px 0 0;font-size:.83rem;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;line-height:1.65}
+.srcline::before{content:"\1F4CC "}
+.verdict{margin:16px 0 0;font-weight:800;font-size:1.05rem;display:none}
+.verdict.ok{color:var(--ok);display:block}
+.verdict.no{color:var(--bad);display:block}
+.nextrow{display:flex;gap:10px;margin:20px 0 0}
+.nextrow .cta{width:auto;flex:1}
+.scorebig{font-size:clamp(3rem,10vw,4.4rem);font-weight:900;background:linear-gradient(120deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1.05}
+.rank{
+  display:inline-block;font-size:clamp(1.05rem,3.4vw,1.35rem);font-weight:800;color:var(--gold);
+  margin:12px 0;border:1.5px solid var(--goldline);border-radius:999px;padding:8px 22px;letter-spacing:.02em
+}
+.sharemsg{font-size:.9rem;color:var(--ok);font-weight:700;min-height:1.4em;margin:8px 0}
+.board{margin:22px 0 4px}
+.board h3{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;font-weight:800}
+.board table{width:100%;border-collapse:collapse;font-size:.95rem}
+.board td{padding:9px 8px;border-bottom:1px solid var(--line)}
+.board tr:nth-child(even) td{background:var(--panel2)}
+.board tr td:first-child{color:var(--muted);font-weight:800;width:34px}
+.board td:last-child{text-align:right;font-weight:800}
+.board .you{color:var(--accent);font-weight:800}
+footer{padding:18px 8px 6px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.75}
+footer a{color:var(--accent);font-weight:700;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .sep{margin:0 7px;opacity:.45}
+.kbd{font-size:.76rem;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-weight:700}
+.confetti{position:fixed;top:-14px;z-index:99;pointer-events:none;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="langs" role="group" aria-label="Language">
+      <button class="langbtn" data-lang="en" aria-pressed="false">EN</button>
+      <button class="langbtn" data-lang="ro" aria-pressed="false">RO</button>
+      <button class="langbtn" data-lang="sr-cyrl" aria-pressed="false">ЋИР</button>
+      <button class="langbtn" data-lang="sr-latn" aria-pressed="false">SR</button>
+    </div>
+    <button class="iconbtn" id="themebtn" title="">🌓</button>
+  </div>
 
+  <div class="card">
+    <header class="hero">
+      <h1>🎬 <span data-i="h1">Celebrity IQ Test</span></h1>
+      <p class="lede" data-i="lede">Fifteen questions, three answers each. Every fact comes with an explanation, a source and the date it was checked.</p>
+    </header>
+    <main>
+      <!-- HOME -->
+      <section class="page on" id="home">
+        <div class="pillrow">
+          <span class="pill">⭐ <b>15</b> <span data-i="pillQ">questions</span></span>
+          <span class="pill">💡 <span data-i="pillE">every answer explained</span></span>
+          <span class="pill">🌐 <span data-i="pillL">4 languages</span></span>
+          <span class="pill">🔒 <span data-i="pillP">runs only in your browser</span></span>
+        </div>
+        <h2 data-i="howH">How it works</h2>
+        <div class="howto"><ul>
+          <li data-i="how1">You get 15 questions about film, music, sport and internet culture. Three answers each, only one is right.</li>
+          <li data-i="how2">After you answer, every option is explained: why the right one is right, and why the traps are traps.</li>
+          <li data-i="how3">Every fact carries a source and the date it was checked.</li>
+        </ul></div>
+        <div class="field">
+          <input id="pname" maxlength="24" autocomplete="off" spellcheck="false" data-ph="namePh">
+        </div>
+        <div id="bestline" style="font-size:.9rem;color:var(--muted);font-weight:700;margin:-12px 0 16px"></div>
+        <button class="cta" id="startbtn">▶ <span data-i="start">Start the quiz</span></button>
+      </section>
+
+      <!-- QUIZ -->
+      <section class="page" id="quiz">
+        <div class="progress"><i id="pbar"></i></div>
+        <div class="qmeta">
+          <span id="qcount"></span>
+          <span id="qtopic" class="pill" style="margin:0"></span>
+        </div>
+        <h2 class="qtext" id="qtext"></h2>
+        <div class="opts" id="opts"></div>
+        <p class="verdict" id="verdict" role="status"></p>
+        <p class="srcline" id="srcline"></p>
+        <div class="nextrow">
+          <button class="cta ghost" id="quitbtn">✕ <span data-i="quit">Leave</span></button>
+          <button class="cta" id="nextbtn" style="display:none" data-i="next">Next</button>
+        </div>
+        <p style="margin:14px 0 0;font-size:.8rem;color:var(--muted)">
+          <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> <span data-i="keys">choose an answer</span> · <span class="kbd">Enter</span> <span data-i="enter">moves on</span>
+        </p>
+      </section>
+
+      <!-- RESULT -->
+      <section class="page" id="result">
+        <div style="text-align:center">
+          <div class="scorebig" id="scorebig"></div>
+          <div class="rank" id="rank"></div>
+          <p id="ranknote" style="color:var(--muted);max-width:480px;margin:0 auto 6px;line-height:1.6"></p>
+          <p class="sharemsg" id="sharemsg"></p>
+        </div>
+        <div class="nextrow" style="margin-top:16px">
+          <button class="cta ghost" id="sharebtn">🔗 <span data-i="share">Copy your result</span></button>
+          <button class="cta" id="againbtn">↻ <span data-i="again">Play again</span></button>
+        </div>
+        <div class="board">
+          <h3 data-i="boardH">Leaderboard · this browser only</h3>
+          <table id="board"></table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <span data-i="offlineNote">One HTML file. Works offline, no account, no ads, no tracking.</span><br>
+    <span data-i="supportText">The quiz is free and stays free.</span>
+    <a href="https://PayPal.me/TekiDeki" target="_blank" rel="noopener">❤️ <span data-i="supportLink">Support the work</span></a>
+    <span class="sep">·</span>
+    <a href="https://github.com/TekiDeki" target="_blank" rel="noopener" data-i="report">Spotted a mistake? Tell me.</a>
+  </footer>
+</div>
+
+<script>
+"use strict";
+/* ---------- i18n ---------- */
+var L={
+"en":{
+ h1:"Celebrity IQ Test", lede:"Fifteen questions, three answers each. Every fact comes with an explanation, a source and the date it was checked.",
+ pillQ:"questions", pillE:"every answer explained", pillL:"4 languages", pillP:"runs only in your browser",
+ howH:"How it works",
+ how1:"You get 15 questions about film, music, sport and internet culture. Three answers each, only one is right.",
+ how2:"After you answer, every option is explained: why the right one is right, and why the traps are traps.",
+ how3:"Every fact carries a source and the date it was checked.",
+ namePh:"Your name (optional, stays in this browser)", start:"Start the quiz", best:"Your record here: {s} of 15",
+ quit:"Leave", next:"Next", keys:"choose an answer", enter:"moves on",
+ qcount:"Question {i} of {n}", topic:{movies:"Film",music:"Music",classics:"Classics",business:"Business",sport:"Sport",internet:"Internet"},
+ verdictOk:"Correct.", verdictNo:"Not this one.",
+ source:"Source: {s}", checked:"Checked: {d}",
+ share:"Copy your result", again:"Play again",
+ shareText:"🎬 Celebrity IQ Test: {s}/15 — {r}. Think you can beat me? ",
+ copied:"Copied. Paste it anywhere.", copyFail:"The browser blocked the copy.",
+ rank0:"Extra",rank1:"Understudy",rank2:"Rising Star",rank3:"A-Lister",rank4:"Hollywood Legend",
+ note0:"Everyone starts somewhere. The explanations are the point.",note1:"You know the faces, not the facts. The explanations will fix that.",note2:"Solid fan knowledge. A few explanations and you level up.",note3:"Red carpet material. You clearly follow this world.",note4:"Walk of Fame material. Impressive.",
+ boardH:"Leaderboard · this browser only", boardEmpty:"No results yet. Yours will be the first.",
+ you:"(you)", guest:"Guest",
+ offlineNote:"One HTML file. Works offline, no account, no ads, no tracking.",
+ supportText:"The quiz is free and stays free.", supportLink:"Support the work", report:"Spotted a mistake? Tell me."
+},
+"ro":{
+ h1:"Testul vedetelor", lede:"Cincisprezece întrebări, câte trei răspunsuri. Fiecare fapt are explicație, sursă și data la care a fost verificat.",
+ pillQ:"întrebări", pillE:"fiecare răspuns explicat", pillL:"4 limbi", pillP:"rulează doar în browserul tău",
+ howH:"Cum funcționează",
+ how1:"Primești 15 întrebări despre film, muzică, sport și cultura internetului. Câte trei răspunsuri, unul singur corect.",
+ how2:"După ce răspunzi, fiecare variantă e explicată: de ce răspunsul corect e corect și de ce celelalte sunt capcane.",
+ how3:"Fiecare fapt are sursa și data verificării.",
+ namePh:"Numele tău (opțional, rămâne în acest browser)", start:"Începe testul", best:"Recordul tău aici: {s} din 15",
+ quit:"Renunță", next:"Următoarea", keys:"aleg răspunsul", enter:"merge mai departe",
+ qcount:"Întrebarea {i} din {n}", topic:{movies:"Film",music:"Muzică",classics:"Clasici",business:"Business",sport:"Sport",internet:"Internet"},
+ verdictOk:"Corect.", verdictNo:"Nu asta.",
+ source:"Sursă: {s}", checked:"Verificat: {d}",
+ share:"Copiază rezultatul", again:"Joacă din nou",
+ shareText:"🎬 Testul vedetelor: {s}/15 — {r}. Crezi că mă poți întrece? ",
+ copied:"Copiat. Lipește-l oriunde.", copyFail:"Browserul a blocat copierea.",
+ rank0:"Figurant",rank1:"Dublură",rank2:"Stea în ascensiune",rank3:"Vedetă",rank4:"Legendă de la Hollywood",
+ note0:"Toți de undeva începem. Explicațiile sunt partea importantă.",note1:"Cunoști fețele, nu faptele. Explicațiile rezolvă asta.",note2:"Cunoștințe solide de fan. Câteva explicații și urci un nivel.",note3:"Material de covor roșu. Clar urmărești lumea asta.",note4:"Material de Walk of Fame. Impresionant.",
+ boardH:"Clasament · doar în acest browser", boardEmpty:"Niciun rezultat încă. Al tău va fi primul.",
+ you:"(tu)", guest:"Oaspete",
+ offlineNote:"Un singur fișier HTML. Merge offline, fără cont, fără reclame, fără urmărire.",
+ supportText:"Testul e gratuit și rămâne gratuit.", supportLink:"Susține munca", report:"Ai văzut o greșeală? Spune-mi."
+},
+"sr-cyrl":{
+ h1:"Квиз о славнима", lede:"Петнаест питања, по три одговора. Свака чињеница има објашњење, извор и датум провере.",
+ pillQ:"питања", pillE:"сваки одговор објашњен", pillL:"4 језика", pillP:"ради само у вашем прегледачу",
+ howH:"Како ради",
+ how1:"Добијаш 15 питања из филма, музике, спорта и интернет културе. По три одговора, само један тачан.",
+ how2:"После одговора, свака опција се објашњава: зашто је добра она добра, а зашто су замке замке.",
+ how3:"Свака чињеница носи извор и датум провере.",
+ namePh:"Твоје име (необавезно, остаје у овом прегледачу)", start:"Почни тест", best:"Твој рекорд овде: {s} од 15",
+ quit:"Прекини", next:"Следеће", keys:"бирају одговор", enter:"иде даље",
+ qcount:"Питање {i} од {n}", topic:{movies:"Филм",music:"Музика",classics:"Класици",business:"Бизнис",sport:"Спорт",internet:"Интернет"},
+ verdictOk:"Тачно.", verdictNo:"Није то.",
+ source:"Извор: {s}", checked:"Проверено: {d}",
+ share:"Копирај резултат", again:"Играј поново",
+ shareText:"🎬 Квиз о славнима: {s}/15 — {r}. Мислиш да ме можеш победити? ",
+ copied:"Копирано. Налепи где год хоћеш.", copyFail:"Прегледач је блокирао копирање.",
+ rank0:"Статиста",rank1:"Дублер",rank2:"Звезда у успону",rank3:"А-листа",rank4:"Холивудска легенда",
+ note0:"Свако однекуд почиње. Објашњења су поента.",note1:"Познајеш лица, а не чињенице. Објашњења то исправљају.",note2:"Солидно фан знање. Пар објашњења и дижеш ниво.",note3:"Материјал за црвени тепих. Очигледно пратиш тај свет.",note4:"Материјал за холивудску стазу славних. Импресивно.",
+ boardH:"Табела · само у овом прегледачу", boardEmpty:"Још нема резултата. Твој ће бити први.",
+ you:"(ти)", guest:"Гост",
+ offlineNote:"Један HTML фајл. Ради и без интернета, без налога, без реклама, без праћења.",
+ supportText:"Тест је бесплатан и остаје бесплатан.", supportLink:"Подржи рад", report:"Видиш грешку? Реци ми."
+},
+"sr-latn":{
+ h1:"Kviz o slavnima", lede:"Petnaest pitanja, po tri odgovora. Svaka činjenica ima objašnjenje, izvor i datum provere.",
+ pillQ:"pitanja", pillE:"svaki odgovor objašnjen", pillL:"4 jezika", pillP:"radi samo u vašem pregledaču",
+ howH:"Kako radi",
+ how1:"Dobijaš 15 pitanja iz filma, muzike, sporta i internet kulture. Po tri odgovora, samo jedan tačan.",
+ how2:"Posle odgovora, svaka opcija se objašnjava: zašto je dobra ona dobra, a zašto su zamke zamke.",
+ how3:"Svaka činjenica nosi izvor i datum provere.",
+ namePh:"Tvoje ime (neobavezno, ostaje u ovom pregledaču)", start:"Počni test", best:"Tvoj rekord ovde: {s} od 15",
+ quit:"Prekini", next:"Sledeće", keys:"biraju odgovor", enter:"ide dalje",
+ qcount:"Pitanje {i} od {n}", topic:{movies:"Film",music:"Muzika",classics:"Klasici",business:"Biznis",sport:"Sport",internet:"Internet"},
+ verdictOk:"Tačno.", verdictNo:"Nije to.",
+ source:"Izvor: {s}", checked:"Provereno: {d}",
+ share:"Kopiraj rezultat", again:"Igraj ponovo",
+ shareText:"🎬 Kviz o slavnima: {s}/15 — {r}. Misliš da me možeš pobediti? ",
+ copied:"Kopirano. Nalepi gde god hoćeš.", copyFail:"Pregledač je blokirao kopiranje.",
+ rank0:"Statista",rank1:"Dubler",rank2:"Zvezda u usponu",rank3:"A-lista",rank4:"Holivudska legenda",
+ note0:"Svako odnekud počinje. Objašnjenja su poenta.",note1:"Poznaješ lica, a ne činjenice. Objašnjenja to ispravljaju.",note2:"Solidno fan znanje. Par objašnjenja i dižeš nivo.",note3:"Materijal za crveni tepih. Očigledno pratiš taj svet.",note4:"Materijal za holivudsku stazu slavnih. Impresivno.",
+ boardH:"Tabela · samo u ovom pregledaču", boardEmpty:"Još nema rezultata. Tvoj će biti prvi.",
+ you:"(ti)", guest:"Gost",
+ offlineNote:"Jedan HTML fajl. Radi i bez interneta, bez naloga, bez reklama, bez praćenja.",
+ supportText:"Test je besplatan i ostaje besplatan.", supportLink:"Podrži rad", report:"Vidiš grešku? Reci mi."
+}};
+
+/* ---------- question bank: 15 × 3 options, every option explained, source + checked date ---------- */
+var Q=[
+{id:"mcu-ironman",p:"movies",c:0,d:"2026-10-22",s:"Marvel Studios · Iron Man (2008)",
+ q:{en:"Who played Tony Stark, Iron Man, in the Marvel Cinematic Universe?",ro:"Cine l-a jucat pe Tony Stark, Iron Man, în Marvel Cinematic Universe?","sr-cyrl":"Ко је тумачио Тонија Старка, Ајронмена, у Марвел филмском универзуму?","sr-latn":"Ko je tumačio Tonija Starka, Ajronmena, u Marvel filmskom univerzumu?"},
+ o:[
+  {t:{en:"Robert Downey Jr.",ro:"Robert Downey Jr.","sr-cyrl":"Роберт Дауни Млађи","sr-latn":"Robert Dauni Mlađi"},
+   w:{en:"He played Tony Stark from Iron Man (2008) to Avengers: Endgame (2019), the role that launched the MCU.",ro:"L-a jucat pe Tony Stark de la Iron Man (2008) până la Avengers: Endgame (2019), rolul care a lansat MCU-ul.","sr-cyrl":"Тумачио је Тонија Старка од „Iron Man“ (2008) до „Avengers: Endgame“ (2019) — улога која је покренула MCU.","sr-latn":"Tumačio je Tonija Starka od „Iron Man“ (2008) do „Avengers: Endgame“ (2019) — uloga koja je pokrenula MCU."}},
+  {t:{en:"Chris Evans",ro:"Chris Evans","sr-cyrl":"Крис Еванс","sr-latn":"Kris Evans"},
+   w:{en:"Chris Evans plays Steve Rogers, Captain America, in the same universe.",ro:"Chris Evans îl joacă pe Steve Rogers, Captain America, în același univers.","sr-cyrl":"Крис Еванс игра Стива Роџерса, Капетана Америку, у истом универзуму.","sr-latn":"Kris Evans igra Stiva Rodžersa, Kapetana Ameriku, u istom univerzumu."}},
+  {t:{en:"Chris Hemsworth",ro:"Chris Hemsworth","sr-cyrl":"Крис Хемсворт","sr-latn":"Kris Hemsvort"},
+   w:{en:"Chris Hemsworth plays Thor, the god of thunder.",ro:"Chris Hemsworth îl joacă pe Thor, zeul tunetului.","sr-cyrl":"Крис Хемсворт игра Тора, бога грома.","sr-latn":"Kris Hemsvort igra Tora, boga groma."}}]},
+
+{id:"the-rock",p:"movies",c:0,d:"2026-10-22",s:"WWE · Encyclopaedia Britannica",
+ q:{en:"Which Hollywood actor was first famous as the wrestler 'The Rock'?",ro:"Care actor de la Hollywood a fost întâi celebru ca wrestlerul „The Rock”?","sr-cyrl":"Који холивудски глумац је прво био познат као рвач „Рок”?","sr-latn":"Koji holivudski glumac je prvo bio poznat kao rvač „Rok”?"},
+ o:[
+  {t:{en:"Dwayne Johnson",ro:"Dwayne Johnson","sr-cyrl":"Двејн Џонсон","sr-latn":"Dvejn Džonson"},
+   w:{en:"He wrestled in the WWE as The Rock from 1996, then became one of the highest-paid actors in the world.",ro:"A luptat în WWE ca The Rock din 1996, apoi a devenit unul dintre cei mai bine plătiți actori din lume.","sr-cyrl":"Рвало се у WWE-у као Рок од 1996, а онда постао један од најплаћенијих глумаца на свету.","sr-latn":"Rvalo se u WWE-u kao Rok od 1996, a onda postao jedan od najplaćenijih glumaca na svetu."}},
+  {t:{en:"Vin Diesel",ro:"Vin Diesel","sr-cyrl":"Вин Дизел","sr-latn":"Vin Dizel"},
+   w:{en:"Vin Diesel was never a wrestler; he came to fame with The Fast and the Furious.",ro:"Vin Diesel n-a fost niciodată wrestler; a devenit cunoscut cu The Fast and the Furious.","sr-cyrl":"Вин Дизел никада није био рвач; прославио се филмом „The Fast and the Furious“.","sr-latn":"Vin Dizel nikada nije bio rvač; proslavio se filmom „The Fast and the Furious“."}},
+  {t:{en:"Jason Statham",ro:"Jason Statham","sr-cyrl":"Џејсон Стејтам","sr-latn":"Džejson Stejtam"},
+   w:{en:"Jason Statham was a diver for Britain's national team before acting, not a wrestler.",ro:"Jason Statham a făcut parte din echipa națională de sărituri în apă a Marii Britanii, nu a fost wrestler.","sr-cyrl":"Џејсон Стејтам је пре глуме био члан британске репрезентације у скоковима у воду, не рвач.","sr-latn":"Džejson Stejtam je pre glume bio član britanske reprezentacije u skokovima u vodu, ne rvač."}}]},
+
+{id:"hermione",p:"movies",c:0,d:"2026-10-22",s:"Warner Bros. · Harry Potter and the Philosopher's Stone (2001)",
+ q:{en:"Who played Hermione Granger in the Harry Potter films?",ro:"Cine a jucat-o pe Hermione Granger în filmele Harry Potter?","sr-cyrl":"Ко је играо Хермиону Грејнџер у филмовима о Харију Потеру?","sr-latn":"Ko je igrao Hermionu Grejndžer u filmovima o Hariju Poteru?"},
+ o:[
+  {t:{en:"Emma Watson",ro:"Emma Watson","sr-cyrl":"Ема Вотсон","sr-latn":"Ema Votson"},
+   w:{en:"She played Hermione in all eight films, from 2001 to 2011.",ro:"A jucat-o pe Hermione în toate cele opt filme, din 2001 până în 2011.","sr-cyrl":"Играла је Хермиону у свих осам филмова, од 2001. до 2011.","sr-latn":"Igrala je Hermionu u svih osam filmova, od 2001. do 2011."}},
+  {t:{en:"Emma Stone",ro:"Emma Stone","sr-cyrl":"Ема Стоун","sr-latn":"Ema Stoun"},
+   w:{en:"Emma Stone won the Best Actress Oscar for La La Land (2016).",ro:"Emma Stone a câștigat Oscarul pentru cea mai bună actriță cu La La Land (2016).","sr-cyrl":"Ема Стоун је освојила Оскара за најбољу глумицу за „La La Land“ (2016).","sr-latn":"Ema Stoun je osvojila Oskara za najbolju glumicu za „La La Land“ (2016)."}},
+  {t:{en:"Emma Roberts",ro:"Emma Roberts","sr-cyrl":"Ема Робертс","sr-latn":"Ema Roberts"},
+   w:{en:"Emma Roberts is known for Scream Queens and American Horror Story.",ro:"Emma Roberts e cunoscută din Scream Queens și American Horror Story.","sr-cyrl":"Ема Робертс је позната по „Scream Queens“ и „American Horror Story“.","sr-latn":"Ema Roberts je poznata po „Scream Queens“ i „American Horror Story“."}}]},
+
+{id:"swift-middle",p:"music",c:0,d:"2026-10-22",s:"Encyclopaedia Britannica",
+ q:{en:"What is Taylor Swift's middle name?",ro:"Care este al doilea nume al lui Taylor Swift?","sr-cyrl":"Које је средње име Тејлор Свифт?","sr-latn":"Koje je srednje ime Tejlor Svift?"},
+ o:[
+  {t:{en:"Alison",ro:"Alison","sr-cyrl":"Алисон","sr-latn":"Alison"},
+   w:{en:"Her full name is Taylor Alison Swift; she was born on 13 December 1989 in West Reading, Pennsylvania.",ro:"Numele ei complet este Taylor Alison Swift; s-a născut pe 13 decembrie 1989 în West Reading, Pennsylvania.","sr-cyrl":"Пуно име јој је Тејлор Алисон Свифт; рођена је 13. децембра 1989. у Вест Редингу, Пенсилванија.","sr-latn":"Puno ime joj je Tejlor Alison Svift; rođena je 13. decembra 1989. u Vest Redingu, Pensilvanija."}},
+  {t:{en:"Marie",ro:"Marie","sr-cyrl":"Мари","sr-latn":"Mari"},
+   w:{en:"A common guess, but not part of her name.",ro:"O ghicire comună, dar nu face parte din numele ei.","sr-cyrl":"Честа претпоставка, али није део њеног имена.","sr-latn":"Česta pretpostavka, ali nije deo njenog imena."}},
+  {t:{en:"Elizabeth",ro:"Elizabeth","sr-cyrl":"Елизабет","sr-latn":"Elizabet"},
+   w:{en:"Elizabeth is the real first name of Lana Del Rey.",ro:"Elizabeth este prenumele real al Lanei Del Rey.","sr-cyrl":"Елизабет је право име Лане дел Реј.","sr-latn":"Elizabet je pravo ime Lane del Rej."}}]},
+
+{id:"beyonce-debut",p:"music",c:0,d:"2026-10-22",s:"Columbia Records · Grammy.com",
+ q:{en:"What was the title of Beyoncé's debut solo album?",ro:"Care a fost titlul albumului de debut solo al lui Beyoncé?","sr-cyrl":"Који је био наслов првог соло албума Бијонсе?","sr-latn":"Koji je bio naslov prvog solo albuma Bijonse?"},
+ o:[
+  {t:{en:"Dangerously in Love",ro:"Dangerously in Love","sr-cyrl":"Dangerously in Love","sr-latn":"Dangerously in Love"},
+   w:{en:"Released in 2003, it won five Grammy Awards.",ro:"Lansat în 2003, a câștigat cinci premii Grammy.","sr-cyrl":"Објављен 2003, освојио је пет Греми награда.","sr-latn":"Objavljen 2003, osvojio je pet Gremi nagrada."}},
+  {t:{en:"B'Day",ro:"B'Day","sr-cyrl":"B'Day","sr-latn":"B'Day"},
+   w:{en:"B'Day was her second solo album, from 2006.",ro:"B'Day a fost al doilea album solo al ei, din 2006.","sr-cyrl":"„B'Day“ је био њен други соло албум, из 2006.","sr-latn":"„B'Day“ je bio njen drugi solo album, iz 2006."}},
+  {t:{en:"I Am... Sasha Fierce",ro:"I Am... Sasha Fierce","sr-cyrl":"I Am... Sasha Fierce","sr-latn":"I Am... Sasha Fierce"},
+   w:{en:"I Am... Sasha Fierce came in 2008, with Single Ladies on it.",ro:"I Am... Sasha Fierce a venit în 2008, cu Single Ladies pe el.","sr-cyrl":"„I Am... Sasha Fierce“ је изашао 2008, са „Single Ladies“ на њему.","sr-latn":"„I Am... Sasha Fierce“ je izašao 2008, sa „Single Ladies“ na njemu."}}]},
+
+{id:"thriller-year",p:"music",c:0,d:"2026-10-22",s:"Epic Records · Guinness World Records",
+ q:{en:"In which year did Michael Jackson release 'Thriller'?",ro:"În ce an a lansat Michael Jackson „Thriller”?","sr-cyrl":"Које године је Мајкл Џексон објавио „Thriller“?","sr-latn":"Koje godine je Majkl Džekson objavio „Thriller“?"},
+ o:[
+  {t:{en:"1982",ro:"1982","sr-cyrl":"1982","sr-latn":"1982"},
+   w:{en:"Thriller was released on 30 November 1982 and became the best-selling album of all time.",ro:"Thriller a fost lansat pe 30 noiembrie 1982 și a devenit cel mai vândut album din toate timpurile.","sr-cyrl":"„Thriller“ је објављен 30. новембра 1982. и постао је најпродаванији албум свих времена.","sr-latn":"„Thriller“ je objavljen 30. novembra 1982. i postao je najprodavaniji album svih vremena."}},
+  {t:{en:"1979",ro:"1979","sr-cyrl":"1979","sr-latn":"1979"},
+   w:{en:"1979 is the year of Off the Wall, his album with Quincy Jones before Thriller.",ro:"1979 e anul lui Off the Wall, albumul său cu Quincy Jones dinainte de Thriller.","sr-cyrl":"1979. је година „Off the Wall“, његовог албума са Квинсијем Џонсом пре „Thriller“-а.","sr-latn":"1979. je godina „Off the Wall“, njegovog albuma sa Kvinsijem Džonsom pre „Thriller“-a."}},
+  {t:{en:"1985",ro:"1985","sr-cyrl":"1985","sr-latn":"1985"},
+   w:{en:"In 1985 he co-wrote We Are the World; Thriller was already three years old.",ro:"În 1985 a co-scris We Are the World; Thriller avea deja trei ani.","sr-cyrl":"1985. је коаутор „We Are the World“; „Thriller“ је већ имао три године.","sr-latn":"1985. je koautor „We Are the World“; „Thriller“ je već imao tri godine."}}]},
+
+{id:"eminem-real",p:"music",c:0,d:"2026-10-22",s:"Encyclopaedia Britannica",
+ q:{en:"What is Eminem's real name?",ro:"Care este numele real al lui Eminem?","sr-cyrl":"Које је право име Еминема?","sr-latn":"Koje je pravo ime Eminema?"},
+ o:[
+  {t:{en:"Marshall Bruce Mathers III",ro:"Marshall Bruce Mathers III","sr-cyrl":"Маршал Брус Матерс III","sr-latn":"Maršal Brus Maters III"},
+   w:{en:"Marshall Bruce Mathers III, born 17 October 1972; 'Slim Shady' is the alter ego, not the name.",ro:"Marshall Bruce Mathers III, născut pe 17 octombrie 1972; „Slim Shady” e alter ego-ul, nu numele.","sr-cyrl":"Маршал Брус Матерс III, рођен 17. октобра 1972; „Слим Шејди“ је алтер его, не име.","sr-latn":"Maršal Brus Maters III, rođen 17. oktobra 1972; „Slim Šejdi“ je alter ego, ne ime."}},
+  {t:{en:"Curtis Jackson",ro:"Curtis Jackson","sr-cyrl":"Кертис Џексон","sr-latn":"Kertis Džekson"},
+   w:{en:"Curtis Jackson is 50 Cent.",ro:"Curtis Jackson este 50 Cent.","sr-cyrl":"Кертис Џексон је 50 цент.","sr-latn":"Kertis Džekson je 50 cent."}},
+  {t:{en:"Calvin Broadus",ro:"Calvin Broadus","sr-cyrl":"Калвин Бродус","sr-latn":"Kalvin Brodus"},
+   w:{en:"Calvin Cordozar Broadus Jr. is Snoop Dogg.",ro:"Calvin Cordozar Broadus Jr. este Snoop Dogg.","sr-cyrl":"Калвин Кордозар Бродус Млађи је Снуп Дог.","sr-latn":"Kalvin Kordozar Brodus Mlađi je Snup Dog."}}]},
+
+{id:"gaga-real",p:"music",c:0,d:"2026-10-22",s:"Encyclopaedia Britannica",
+ q:{en:"What is Lady Gaga's real name?",ro:"Care este numele real al lui Lady Gaga?","sr-cyrl":"Које је право име Лејди Гаге?","sr-latn":"Koje je pravo ime Lejdi Gage?"},
+ o:[
+  {t:{en:"Stefani Germanotta",ro:"Stefani Germanotta","sr-cyrl":"Стефани Германота","sr-latn":"Stefani Germanota"},
+   w:{en:"Stefani Joanne Angelina Germanotta, born 28 March 1986 in New York.",ro:"Stefani Joanne Angelina Germanotta, născută pe 28 martie 1986 în New York.","sr-cyrl":"Стефани Џоан Анђелина Германота, рођена 28. марта 1986. у Њујорку.","sr-latn":"Stefani Džoan Anđelina Germanota, rođena 28. marta 1986. u Njujorku."}},
+  {t:{en:"Robyn Fenty",ro:"Robyn Fenty","sr-cyrl":"Робин Фенти","sr-latn":"Robin Fenti"},
+   w:{en:"Robyn Rihanna Fenty is Rihanna's real name - the reason her brand is called Fenty.",ro:"Robyn Rihanna Fenty este numele real al Rihannei - motivul pentru care brandul ei se numește Fenty.","sr-cyrl":"Робин Ријана Фенти је право име Ријане — разлог због којег се њен бренд зове Fenty.","sr-latn":"Robin Rijana Fenti je pravo ime Rijane — razlog zbog kojeg se njen brend zove Fenty."}},
+  {t:{en:"Alecia Moore",ro:"Alecia Moore","sr-cyrl":"Алиша Мур","sr-latn":"Ališa Mur"},
+   w:{en:"Alecia Beth Moore is Pink.",ro:"Alecia Beth Moore este Pink.","sr-cyrl":"Алиша Бет Мур је Пинк.","sr-latn":"Ališa Bet Mur je Pink."}}]},
+
+{id:"monroe-real",p:"classics",c:0,d:"2026-10-22",s:"Encyclopaedia Britannica",
+ q:{en:"What was Marilyn Monroe's name at birth?",ro:"Care a fost numele de la naștere al lui Marilyn Monroe?","sr-cyrl":"Које је било име Мерилин Монро на рођењу?","sr-latn":"Koje je bilo ime Merilin Monro na rođenju?"},
+ o:[
+  {t:{en:"Norma Jeane Mortenson",ro:"Norma Jeane Mortenson","sr-cyrl":"Норма Џин Мортенсон","sr-latn":"Norma Džin Mortenson"},
+   w:{en:"She was born Norma Jeane Mortenson on 1 June 1926 in Los Angeles.",ro:"S-a născut Norma Jeane Mortenson pe 1 iunie 1926 în Los Angeles.","sr-cyrl":"Рођена је као Норма Џин Мортенсон 1. јуна 1926. у Лос Анђелесу.","sr-latn":"Rođena je kao Norma Džin Mortenson 1. juna 1926. u Los Anđelesu."}},
+  {t:{en:"Norma Jeane Baker",ro:"Norma Jeane Baker","sr-cyrl":"Норма Џин Бејкер","sr-latn":"Norma Džin Bejker"},
+   w:{en:"Close: Baker was her baptized name, taken from her mother's first marriage - but Mortenson is on the birth certificate.",ro:"Aproape: Baker a fost numele de botez, luat din prima căsătorie a mamei - dar Mortenson e pe certificatul de naștere.","sr-cyrl":"Близу: Бејкер је било њено крштено име, по првом браку мајке — али на изводу стоји Мортенсон.","sr-latn":"Blizu: Bejker je bilo njeno kršteno ime, po prvom braku majke — ali na izvodu stoji Mortenson."}},
+  {t:{en:"Marilyn Baker",ro:"Marilyn Baker","sr-cyrl":"Мерилин Бејкер","sr-latn":"Merilin Bejker"},
+   w:{en:"'Marilyn Monroe' was invented by a studio in 1946; no Baker in it at any point.",ro:"„Marilyn Monroe” a fost inventat de un studio în 1946; niciun Baker în el, niciodată.","sr-cyrl":"„Мерилин Монро“ је смислио студио 1946; у њему никада није било Бејкера.","sr-latn":"„Merilin Monro“ je smislio studio 1946; u njemu nikada nije bilo Bejkera."}}]},
+
+{id:"cage-real",p:"movies",c:0,d:"2026-10-22",s:"Encyclopaedia Britannica",
+ q:{en:"Nicolas Cage changed his name so he could make it on his own. What was he born as?",ro:"Nicolas Cage și-a schimbat numele ca să reușească pe cont propriu. Cu ce nume s-a născut?","sr-cyrl":"Николас Кејџ је променио име да би успео сам. Како се родио?","sr-latn":"Nikolas Kejdž je promenio ime da bi uspeo sam. Kako se rodio?"},
+ o:[
+  {t:{en:"Nicolas Kim Coppola",ro:"Nicolas Kim Coppola","sr-cyrl":"Николас Ким Копола","sr-latn":"Nikolas Kim Kopola"},
+   w:{en:"He is the nephew of director Francis Ford Coppola; he took the surname Cage to build his career on his own.",ro:"Este nepotul regizorului Francis Ford Coppola; și-a luat numele Cage ca să-și construiască cariera pe cont propriu.","sr-cyrl":"Нећак је редитеља Френсиса Форда Кополе; узео је име Кејџ да би каријеру градио самостално.","sr-latn":"Nećak je reditelja Frensisa Forda Kopole; uzeo je ime Kejdž da bi karijeru gradio samostalno."}},
+  {t:{en:"Nicolas Caine",ro:"Nicolas Caine","sr-cyrl":"Николас Кејн","sr-latn":"Nikolas Kejn"},
+   w:{en:"Caine belongs to Michael Caine, born Maurice Micklewhite.",ro:"Caine îi aparține lui Michael Caine, născut Maurice Micklewhite.","sr-cyrl":"Кејн припада Мајклу Кејну, рођеном као Морис Миклвајт.","sr-latn":"Kejn pripada Majklu Kejnu, rođenom kao Moris Miklvajt."}},
+  {t:{en:"Nicolas Cage West",ro:"Nicolas Cage West","sr-cyrl":"Николас Кејџ Вест","sr-latn":"Nikolas Kejdž Vest"},
+   w:{en:"West is Kanye West's surname; this hybrid does not exist.",ro:"West e numele de familie al lui Kanye West; acest hibrid nu există.","sr-cyrl":"Вест је презиме Кање Веста; овај хибрид не постоји.","sr-latn":"Vest je prezime Kanje Vesta; ovaj hibrid ne postoji."}}]},
+
+{id:"fenty-beauty",p:"business",c:0,d:"2026-10-22",s:"Encyclopaedia Britannica · Fenty Beauty",
+ q:{en:"What is the name of Rihanna's cosmetics brand?",ro:"Cum se numește brandul de cosmetice al Rihannei?","sr-cyrl":"Како се зове Ријанин козметички бренд?","sr-latn":"Kako se zove Rijanin kozmetički brend?"},
+ o:[
+  {t:{en:"Fenty Beauty",ro:"Fenty Beauty","sr-cyrl":"Fenty Beauty","sr-latn":"Fenty Beauty"},
+   w:{en:"Launched in September 2017, named after her own surname, Fenty.",ro:"Lansat în septembrie 2017, numit după propriul ei nume de familie, Fenty.","sr-cyrl":"Лансиран у септембру 2017, по њеном презимену Фенти.","sr-latn":"Lansiran u septembru 2017, po njenom prezimenu Fenti."}},
+  {t:{en:"Savage Beauty",ro:"Savage Beauty","sr-cyrl":"Savage Beauty","sr-latn":"Savage Beauty"},
+   w:{en:"Savage X Fenty is her lingerie line, not the makeup brand.",ro:"Savage X Fenty e linia ei de lenjerie, nu brandul de make-up.","sr-cyrl":"„Savage X Fenty“ је њена линија доњег веша, не козметички бренд.","sr-latn":"„Savage X Fenty“ je njena linija donjeg veša, ne kozmetički brend."}},
+  {t:{en:"Riri Cosmetics",ro:"Riri Cosmetics","sr-cyrl":"Riri Cosmetics","sr-latn":"Riri Cosmetics"},
+   w:{en:"'Riri' is her nickname; no such brand exists.",ro:"„Riri” e porecla ei; un asemenea brand nu există.","sr-cyrl":"„Рири“ јој је надимак; такав бренд не постоји.","sr-latn":"„Riri“ joj je nadimak; takav brend ne postoji."}}]},
+
+{id:"bond-most",p:"movies",c:0,d:"2026-10-22",s:"Eon Productions · Encyclopaedia Britannica",
+ q:{en:"Which actor played James Bond in the most films of the official Eon series?",ro:"Care actor l-a jucat pe James Bond în cele mai multe filme ale seriei oficiale Eon?","sr-cyrl":"Који глумац је највише пута играо Џејмса Бонда у званичној Еон серији?","sr-latn":"Koji glumac je najviše puta igrao Džejmsa Bonda u zvaničnoj Eon seriji?"},
+ o:[
+  {t:{en:"Roger Moore",ro:"Roger Moore","sr-cyrl":"Роџер Мур","sr-latn":"Rodžer Mur"},
+   w:{en:"Seven films, from Live and Let Die (1973) to A View to a Kill (1985).",ro:"Șapte filme, de la Live and Let Die (1973) până la A View to a Kill (1985).","sr-cyrl":"Седам филмова, од „Live and Let Die“ (1973) до „A View to a Kill“ (1985).","sr-latn":"Sedam filmova, od „Live and Let Die“ (1973) do „A View to a Kill“ (1985)."}},
+  {t:{en:"Sean Connery",ro:"Sean Connery","sr-cyrl":"Шон Конери","sr-latn":"Šon Koneri"},
+   w:{en:"Six Eon films; a seventh, Never Say Never Again (1983), was made outside the official series.",ro:"Șase filme Eon; al șaptelea, Never Say Never Again (1983), a fost făcut în afara seriei oficiale.","sr-cyrl":"Шест Еон филмова; седми, „Never Say Never Again“ (1983), рађен је ван званичне серије.","sr-latn":"Šest Eon filmova; sedmi, „Never Say Never Again“ (1983), rađen je van zvanične serije."}},
+  {t:{en:"Daniel Craig",ro:"Daniel Craig","sr-cyrl":"Данијел Крејг","sr-latn":"Danijel Krejg"},
+   w:{en:"Five films, from Casino Royale (2006) to No Time to Die (2021).",ro:"Cinci filme, de la Casino Royale (2006) până la No Time to Die (2021).","sr-cyrl":"Пет филмова, од „Casino Royale“ (2006) до „No Time to Die“ (2021).","sr-latn":"Pet filmova, od „Casino Royale“ (2006) do „No Time to Die“ (2021)."}}]},
+
+{id:"phelps-golds",p:"sport",c:0,d:"2026-10-22",s:"Olympics.com · International Olympic Committee",
+ q:{en:"Which athlete holds the record for the most Olympic gold medals?",ro:"Ce sportiv deține recordul pentru cele mai multe medalii olimpice de aur?","sr-cyrl":"Који спортиста држи рекорд по броју олимпијских златних медаља?","sr-latn":"Koji sportista drži rekord po broju olimpijskih zlatnih medalja?"},
+ o:[
+  {t:{en:"Michael Phelps",ro:"Michael Phelps","sr-cyrl":"Мајкл Фелпс","sr-latn":"Majkl Felps"},
+   w:{en:"23 golds and 28 medals overall, from Sydney 2000 to Rio 2016 - the most decorated Olympian in history.",ro:"23 de medalii de aur și 28 în total, de la Sydney 2000 la Rio 2016 - cel mai decorat olimpic din istorie.","sr-cyrl":"23 златне и укупно 28 медаља, од Сиднеја 2000. до Рија 2016. — најодликованији олимпијац у историји.","sr-latn":"23 zlatne i ukupno 28 medalja, od Sidneja 2000. do Rija 2016. — najodlikovaniji olimpijac u istoriji."}},
+  {t:{en:"Usain Bolt",ro:"Usain Bolt","sr-cyrl":"Јусејн Болт","sr-latn":"Jusejn Bolt"},
+   w:{en:"Bolt has 8 golds, all in sprinting, from 2008 to 2016.",ro:"Bolt are 8 aururi, toate în sprint, din 2008 până în 2016.","sr-cyrl":"Болт има 8 златних, све у спринту, од 2008. до 2016.","sr-latn":"Bolt ima 8 zlatnih, sve u sprintu, od 2008. do 2016."}},
+  {t:{en:"Larisa Latynina",ro:"Larisa Latynina","sr-cyrl":"Лариса Латинина","sr-latn":"Larisa Latinina"},
+   w:{en:"The gymnast has 9 golds and 18 medals; she held the overall record for 48 years, until Phelps.",ro:"Gimnasta are 9 aururi și 18 medalii; a deținut recordul general 48 de ani, până la Phelps.","sr-cyrl":"Гимнастичарка има 9 златних и 18 медаља; општи рекорд држала је 48 година, до Фелпса.","sr-latn":"Gimnastičarka ima 9 zlatnih i 18 medalja; opšti rekord držala je 48 godina, do Felpsa."}}]},
+
+{id:"gangnam-1b",p:"internet",c:0,d:"2026-10-22",s:"Guinness World Records · YouTube",
+ q:{en:"Which music video was the first to reach one billion views on YouTube?",ro:"Care videoclip muzical a fost primul care a atins un miliard de vizualizări pe YouTube?","sr-cyrl":"Који музички спот је први достигао милијарду прегледа на YouTube?","sr-latn":"Koji muzički spot je prvi dostigao milijardu pregleda na YouTube?"},
+ o:[
+  {t:{en:"Gangnam Style",ro:"Gangnam Style","sr-cyrl":"Gangnam Style","sr-latn":"Gangnam Style"},
+   w:{en:"PSY's video passed one billion views on 21 December 2012, 159 days after upload. It later broke YouTube's view counter itself.",ro:"Videoclipul lui PSY a depășit un miliard de vizualizări pe 21 decembrie 2012, la 159 de zile de la publicare. Mai târziu a spart chiar contorul de vizualizări al YouTube.","sr-cyrl":"PSY-јев спот је прешао милијарду прегледа 21. децембра 2012, 159 дана од објаве. Касније је поломио и сам YouTube бројач прегледа.","sr-latn":"PSY-jev spot je prešao milijardu pregleda 21. decembra 2012, 159 dana od objave. Kasnije je polomio i sam YouTube brojač pregleda."}},
+  {t:{en:"Baby",ro:"Baby","sr-cyrl":"Baby","sr-latn":"Baby"},
+   w:{en:"Justin Bieber's Baby held the most-viewed record before Gangnam Style took over in November 2012.",ro:"Baby al lui Justin Bieber deținea recordul de vizualizări înainte ca Gangnam Style să-l ia în noiembrie 2012.","sr-cyrl":"„Baby“ Џастина Бибера држао је рекорд пре него што га је „Gangnam Style“ преузео у новембру 2012.","sr-latn":"„Baby“ Džastina Bibera držao je rekord pre nego što ga je „Gangnam Style“ preuzeo u novembru 2012."}},
+  {t:{en:"Despacito",ro:"Despacito","sr-cyrl":"Despacito","sr-latn":"Despacito"},
+   w:{en:"Despacito came later: it was the first video to five billion views, in 2018.",ro:"Despacito a venit mai târziu: a fost primul video la cinci miliarde de vizualizări, în 2018.","sr-cyrl":"„Despacito“ је дошао касније: први је видео са пет милијарди прегледа, 2018.","sr-latn":"„Despacito“ je došao kasnije: prvi je video sa pet milijardi pregleda, 2018."}}]},
+
+{id:"hepburn-oscars",p:"classics",c:0,d:"2026-10-22",s:"Academy of Motion Picture Arts and Sciences",
+ q:{en:"Which actress won the most Academy Awards for Best Actress?",ro:"Care actriță a câștigat cele mai multe premii Oscar pentru cea mai bună actriță?","sr-cyrl":"Која глумица је освојила највише Оскара за најбољу глумицу?","sr-latn":"Koja glumica je osvojila najviše Oskara za najbolju glumicu?"},
+ o:[
+  {t:{en:"Katharine Hepburn",ro:"Katharine Hepburn","sr-cyrl":"Кетрин Хепберн","sr-latn":"Ketrin Hepbern"},
+   w:{en:"Four Best Actress wins, over five decades: Morning Glory (1933), Guess Who's Coming to Dinner (1967), The Lion in Winter (1968), On Golden Pond (1981).",ro:"Patru premii pentru cea mai bună actriță, pe cinci decenii: Morning Glory (1933), Guess Who's Coming to Dinner (1967), The Lion in Winter (1968), On Golden Pond (1981).","sr-cyrl":"Четири Оскара за најбољу глумицу, кроз пет деценија: „Morning Glory“ (1933), „Guess Who\u2019s Coming to Dinner“ (1967), „The Lion in Winter“ (1968), „On Golden Pond“ (1981).","sr-latn":"Četiri Oskara za najbolju glumicu, kroz pet decenija: „Morning Glory“ (1933), „Guess Who\u2019s Coming to Dinner“ (1967), „The Lion in Winter“ (1968), „On Golden Pond“ (1981)."}},
+  {t:{en:"Meryl Streep",ro:"Meryl Streep","sr-cyrl":"Мерил Стрип","sr-latn":"Meril Strip"},
+   w:{en:"Streep holds the record for nominations, but has three wins (one supporting).",ro:"Streep deține recordul la nominalizări, dar are trei victorii (unul în rol secundar).","sr-cyrl":"Стрип држи рекорд по номинацијама, али има три победе (једна споредна).","sr-latn":"Strip drži rekord po nominacijama, ali ima tri pobede (jedna sporedna)."}},
+  {t:{en:"Ingrid Bergman",ro:"Ingrid Bergman","sr-cyrl":"Ингрид Бергман","sr-latn":"Ingrid Bergman"},
+   w:{en:"Bergman won three Oscars, two of them for Best Actress.",ro:"Bergman a câștigat trei Oscaruri, două pentru cea mai bună actriță.","sr-cyrl":"Бергманова је освојила три Оскара, два за најбољу глумицу.","sr-latn":"Bergmanova je osvojila tri Oskara, dva za najbolju glumicu."}}]}
+];
+
+/* ---------- state ---------- */
+var LANGS=["en","ro","sr-cyrl","sr-latn"];
+var lang="en", qi=0, score=0, locked=false, order=[], optOrder=[];
+var $=function(s){return document.querySelector(s)};
+function t(k){var v=L[lang][k];return typeof v==="string"?v:k}
+function tf(k,vars){var s=t(k);for(var key in vars){s=s.split("{"+key+"}").join(vars[key])}return s}
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem("ciq-"+k)||"null");localStorage.setItem("ciq-"+k,JSON.stringify(v))}catch(e){return null}}
+
+/* ---------- language & theme ---------- */
+function detectLang(){
+  var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||"en"];
+  for(var i=0;i<ls.length;i++){var l=(ls[i]||"").toLowerCase();
+    if(l.indexOf("ro")===0)return"ro";
+    if(l.indexOf("sr")===0)return l.indexOf("latn")>-1?"sr-latn":"sr-cyrl";
+  }
+  return"en";
+}
+function setLang(l){
+  lang=LANGS.indexOf(l)>-1?l:"en"; store("lang",lang);
+  document.documentElement.lang=lang==="sr-cyrl"?"sr-Cyrl":(lang==="sr-latn"?"sr-Latn":lang);
+  var btns=document.querySelectorAll(".langbtn");
+  for(var i=0;i<btns.length;i++)btns[i].setAttribute("aria-pressed",btns[i].getAttribute("data-lang")===lang?"true":"false");
+  var els=document.querySelectorAll("[data-i]");
+  for(var j=0;j<els.length;j++){var k=els[j].getAttribute("data-i");if(L[lang][k]!==undefined)els[j].textContent=L[lang][k]}
+  var ph=$("[data-ph]"); if(ph)ph.placeholder=t("namePh");
+  var tb=$("#themebtn"); tb.title=L[lang].theme||"Theme"; tb.setAttribute("aria-label",tb.title);
+  renderBest(); if(document.getElementById("quiz").classList.contains("on")&&!locked)renderQ(); renderBoard();
+}
+function setTheme(th){document.documentElement.setAttribute("data-theme",th);store("theme",th);
+  var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",th==="dark"?"#131020":"#f6f3ec")}
+
+/* ---------- quiz ---------- */
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x}return a}
+function startQuiz(){
+  order=shuffle(Q.map(function(_,i){return i}));
+  qi=0;score=0;locked=false;
+  show("quiz"); renderQ();
+}
+function renderQ(){
+  locked=false;
+  var q=Q[order[qi]];
+  optOrder=shuffle([0,1,2]);
+  $("#qcount").textContent=tf("qcount",{i:qi+1,n:order.length});
+  $("#qtopic").textContent=(L[lang].topic&&L[lang].topic[q.p])||q.p;
+  $("#qtext").textContent=q.q[lang];
+  $("#verdict").className="verdict"; $("#verdict").textContent="";
+  $("#srcline").style.display="none";
+  $("#nextbtn").style.display="none";
+  var box=$("#opts"); box.className="opts"; box.innerHTML="";
+  var letters=["1","2","3"];
+  optOrder.forEach(function(oi,slot){
+    var b=document.createElement("button");
+    b.type="button"; b.className="opt";
+    b.innerHTML='<span class="ol"><span class="k">'+letters[slot]+'</span><span class="txt"></span><span class="mark"></span></span><span class="note"></span>';
+    b.querySelector(".txt").textContent=q.o[oi].t[lang];
+    b.querySelector(".note").textContent=q.o[oi].w[lang];
+    b.setAttribute("data-oi",oi);
+    b.addEventListener("click",function(){answer(oi,this)});
+    box.appendChild(b);
+  });
+  $("#pbar").style.width=(qi/order.length*100)+"%";
+}
+function answer(oi,btn){
+  if(locked)return; locked=true;
+  var q=Q[order[qi]], correct=oi===q.c;
+  if(correct)score++;
+  var box=$("#opts"); box.className="opts quizlock";
+  var btns=box.querySelectorAll(".opt");
+  for(var i=0;i<btns.length;i++){
+    var b=btns[i], bOi=parseInt(b.getAttribute("data-oi"),10);
+    b.disabled=true;
+    if(bOi===q.c)b.classList.add("right");
+    else if(b===btn)b.classList.add("wrong");
+    b.querySelector(".mark").textContent=bOi===q.c?"\u2713":(b===btn?"\u2717":"");
+  }
+  var v=$("#verdict");
+  v.className="verdict "+(correct?"ok":"no");
+  v.textContent=correct?t("verdictOk"):tf("wrongNote",{a:q.o[q.c].t[lang]});
+  $("#srcline").innerHTML=tf("source",{s:q.s})+" · "+tf("checked",{d:q.d});
+  $("#srcline").style.display="block";
+  $("#nextbtn").style.display="inline-block";
+  $("#nextbtn").textContent=(qi===order.length-1)?t("finish"):t("next");
+  if(!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)){
+    try{$("#nextbtn").scrollIntoView({behavior:"smooth",block:"nearest"})}catch(e){}
+  }
+  $("#pbar").style.width=((qi+1)/order.length*100)+"%";
+}
+function next(){
+  if(qi<order.length-1){qi++;renderQ()}
+  else finish();
+}
+function rankOf(s){return s<=4?0:s<=8?1:s<=11?2:s<=13?3:4}
+function finish(){
+  var r=rankOf(score);
+  $("#scorebig").textContent=score+"/15";
+  $("#rank").textContent="🏆 "+t("rank"+r);
+  $("#ranknote").textContent=t("note"+r);
+  $("#sharemsg").textContent="";
+  saveBoard();
+  show("result"); renderBoard();
+  if(score>=12)confetti();
+}
+function show(id){
+  var pages=document.querySelectorAll(".page");
+  for(var i=0;i<pages.length;i++)pages[i].classList.remove("on");
+  document.getElementById(id).classList.add("on");
+  window.scrollTo(0,0);
+}
+
+/* ---------- leaderboard (localStorage only) ---------- */
+function board(){return store("board")||[]}
+function saveBoard(){
+  var name=($("#pname").value||"").trim().slice(0,24)||t("guest");
+  var b=board();
+  b.push({n:name,s:score,d:new Date().toISOString().slice(0,10)});
+  b.sort(function(a,c){return c.s-a.s||(a.d<c.d?-1:1)});
+  store("board",b.slice(0,10));
+}
+function renderBoard(){
+  var b=board(), el=$("#board");
+  if(!el)return;
+  if(!b.length){el.innerHTML='<tr><td colspan="3" style="text-align:center;color:var(--muted)">'+t("boardEmpty")+'</td></tr>';return}
+  var html="";
+  for(var i=0;i<b.length;i++){
+    html+="<tr><td>"+(i+1)+"</td><td></td><td>"+b[i].s+"/15</td></tr>";
+  }
+  el.innerHTML=html;
+  var rows=el.querySelectorAll("tr");
+  for(var j=0;j<rows.length&&j<b.length;j++){
+    var nm=document.createElement("td"); nm.textContent=b[j].n;
+    rows[j].replaceChild(nm,rows[j].children[1]);
+  }
+}
+function renderBest(){
+  var b=board(), el=document.getElementById("bestline");
+  if(!el)return;
+  el.textContent=(b.length&&b[0].s)?tf("best",{s:b[0].s}):"";
+}
+
+/* ---------- share ---------- */
+function share(){
+  var r=t("rank"+rankOf(score));
+  var txt=tf("shareText",{s:score,r:r})+(location.href||"");
+  function done(ok){$("#sharemsg").textContent=ok?t("copied"):t("copyFail")}
+  function legacy(){
+    var ok=false, ta=document.createElement("textarea");
+    ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ok=document.execCommand("copy")}catch(e){}
+    document.body.removeChild(ta); done(ok);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){done(true)},legacy);
+  }else legacy();
+}
+
+/* ---------- confetti ---------- */
+function confetti(){
+  if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var colors=["#FFD700","#9400D3","#fff","#8A2BE2","#e6c34a"],n=90;
+  for(var i=0;i<n;i++){
+    (function(i){
+      var c=document.createElement("i");c.className="confetti";
+      c.style.left=Math.random()*100+"vw";
+      c.style.background=colors[i%colors.length];
+      c.style.width=c.style.height=(Math.random()*8+5)+"px";
+      document.body.appendChild(c);
+      var fall=c.animate?c.animate([{transform:"translateY(0) rotate(0)",opacity:1},
+        {transform:"translateY("+(window.innerHeight+40)+"px) rotate("+(Math.random()*720-360)+"deg)",opacity:.7}],
+        {duration:Math.random()*2500+2200,delay:Math.random()*800,easing:"cubic-bezier(.4,0,.6,1)"}):null;
+      if(fall)fall.onfinish=function(){c.remove()};else setTimeout(function(){c.remove()},3500);
+    })(i);
+  }
+}
+
+/* ---------- wiring ---------- */
+document.querySelectorAll(".langbtn").forEach(function(b){
+  b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"))});
+});
+$("#themebtn").addEventListener("click",function(){
+  setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
+});
+$("#startbtn").addEventListener("click",startQuiz);
+$("#nextbtn").addEventListener("click",next);
+$("#quitbtn").addEventListener("click",function(){show("home")});
+$("#againbtn").addEventListener("click",startQuiz);
+$("#sharebtn").addEventListener("click",share);
+document.addEventListener("keydown",function(e){
+  if(document.getElementById("quiz").classList.contains("on")){
+    if(locked&&e.key==="Enter"){e.preventDefault();next();return}
+    if(!locked){
+      var n=parseInt(e.key,10);
+      if(n>=1&&n<=3){var b=$("#opts").querySelectorAll(".opt")[n-1];if(b&&!b.disabled)b.click()}
+    }
+  }else if(document.getElementById("result").classList.contains("on")&&e.key==="Enter"){
+    e.preventDefault();startQuiz();
+  }
+});
+/* extra locale keys used above */
+L.en.wrongNote="Not this one. The right answer: {a}.";L.en.finish="See the result";
+L.ro.wrongNote="Nu asta. Răspunsul bun: {a}.";L.ro.finish="Vezi rezultatul";
+L["sr-cyrl"].wrongNote="Није то. Тачан одговор: {a}.";L["sr-cyrl"].finish="Види резултат";
+L["sr-latn"].wrongNote="Nije to. Tačan odgovor: {a}.";L["sr-latn"].finish="Vidi rezultat";
+L.en.theme="Switch theme";L.ro.theme="Schimbă tema";
+L["sr-cyrl"].theme="Промени тему";L["sr-latn"].theme="Promeni temu";
+
+/* init */
+(function(){
+  setTheme(store("theme")||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  setLang(store("lang")||detectLang());
+})();
+</script>
+</body>
+</html>
