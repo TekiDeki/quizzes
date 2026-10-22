@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>quiz.freehtml.dev · free quizzes, checked answers</title>
+<meta name="description" content="Short, honest quizzes about film, music, sport and internet culture. Every answer explained, every fact with a source and the date it was checked. No account, no ads, no tracking.">
+<meta name="theme-color" content="#f6f3ec">
+<meta property="og:title" content="quiz.freehtml.dev · free quizzes, checked answers">
+<meta property="og:description" content="Every answer explained, every fact with a source and the date it was checked. One HTML file per quiz.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+<style>
+:root{
+  --bg:#f6f3ec; --panel:#ffffff; --panel2:#f1ecdf; --text:#241f33; --muted:#6f687f;
+  --accent:#6d28d9; --accent2:#8b2fd6; --gold:#946a00; --goldline:#e3c05a; --ring:#e3c05a;
+  --line:#e8e0d0; --shadow:0 1px 2px rgba(36,31,51,.05),0 14px 38px rgba(36,31,51,.10);
+  --hero-a:#5b21b6; --hero-b:#7127d0; --hero-c:#38104f;
+}
+[data-theme="dark"]{
+  --bg:#131020; --panel:#1d1930; --panel2:#282146; --text:#ece9f7; --muted:#a79ec4;
+  --accent:#a78bfa; --accent2:#c4a5ff; --gold:#ffd766; --goldline:#8a6d1a; --ring:#8a6d1a;
+  --line:#3a3160; --shadow:0 1px 2px rgba(0,0,0,.45),0 22px 52px rgba(0,0,0,.42);
+  --hero-a:#46189c; --hero-b:#6d28d9; --hero-c:#26094a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+::selection{background:var(--accent);color:#fff}
+body{
+  font-family:'Segoe UI',Inter,system-ui,-apple-system,'Noto Sans',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;
+  background-image:radial-gradient(620px 420px at 8% 95%,rgba(109,40,217,.07),transparent 60%),
+                   radial-gradient(700px 420px at 95% 5%,rgba(212,164,33,.09),transparent 60%);
+  padding:16px;display:flex;flex-direction:column;align-items:center;
+}
+.wrap{width:100%;max-width:860px;margin:0 auto;display:flex;flex-direction:column;min-height:calc(100vh - 32px)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:4px 2px}
+.langs{display:flex;gap:5px;flex-wrap:wrap}
+.langbtn,.iconbtn{
+  font:inherit;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.03em;
+  background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.15s;min-height:34px
+}
+.langbtn{border-radius:999px;padding:6px 13px}
+.iconbtn{border-radius:50%;width:36px;height:36px;padding:0;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.langbtn:hover,.iconbtn:hover{color:var(--text);border-color:var(--accent)}
+.langbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:8px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow);overflow:hidden;margin:12px 0;flex:1;display:flex;flex-direction:column;
+  animation:cardIn .45s ease both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+header.hero{
+  background:
+    radial-gradient(560px 240px at 88% -20%,rgba(255,215,0,.20),transparent 62%),
+    radial-gradient(420px 200px at 0% 120%,rgba(56,16,79,.55),transparent 60%),
+    linear-gradient(140deg,var(--hero-a) 0%,var(--hero-b) 52%,var(--hero-c) 100%);
+  color:#fff;text-align:center;padding:clamp(36px,7vw,56px) 24px clamp(30px,5vw,42px);
+}
+.kicker{
+  display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.13em;
+  color:#ffd766;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;padding:5px 14px;margin-bottom:16px
+}
+h1{
+  font-size:clamp(1.75rem,5.6vw,2.9rem);font-weight:900;letter-spacing:-.02em;line-height:1.08;
+  background:linear-gradient(120deg,#ffe082 0%,#ffd766 35%,#fff 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.22));
+}
+.hero .lede{font-size:clamp(.95rem,2.6vw,1.12rem);opacity:.94;max-width:560px;margin:14px auto 0;line-height:1.6;font-weight:300}
+main{padding:clamp(18px,4vw,42px);flex:1;display:flex;flex-direction:column}
+h2{font-size:clamp(1.2rem,3.4vw,1.55rem);margin-bottom:14px;line-height:1.3;letter-spacing:-.01em}
+#cards{display:grid;grid-template-columns:1fr;gap:12px;margin:2px 0 6px}
+.qcard{
+  display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:var(--text);
+  background:var(--panel);border:1.5px solid var(--line);border-radius:18px;padding:18px;
+  transition:border-color .15s,transform .12s,box-shadow .15s;min-height:34px;
+  animation:optIn .3s cubic-bezier(.2,.7,.3,1) both
+}
+@keyframes optIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qcard:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 24px rgba(36,31,51,.10)}
+.qemoji{
+  flex:0 0 46px;height:46px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:1.35rem
+}
+.qb{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.qtitle{font-weight:800;font-size:1.08rem;letter-spacing:-.01em}
+.qdesc{color:var(--muted);font-size:.92rem;line-height:1.55;margin-top:4px}
+.qmeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pill{font-size:.77rem;font-weight:700;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.pill b{color:var(--gold);font-weight:800}
+.qgo{margin-left:auto;align-self:center;color:var(--muted);font-size:1.25rem;transition:.15s;padding:0 4px}
+.qcard:hover .qgo{color:var(--gold);transform:translateX(3px)}
+.more{text-align:center;color:var(--muted);font-size:.88rem;margin:16px 0 4px}
+.howto{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 20px;margin:26px 0 4px}
+.howto ul{list-style:none}
+.howto li{margin:10px 0;padding-left:26px;position:relative;line-height:1.55;font-size:.95rem}
+.howto li::before{content:"\2726";position:absolute;left:4px;color:var(--gold);font-size:.8rem;top:2px}
+footer{padding:18px 8px 6px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.75}
+footer a{color:var(--accent);font-weight:700;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .sep{margin:0 7px;opacity:.45}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="langs" role="group" aria-label="Language">
+      <button class="langbtn" data-lang="en" aria-pressed="false">EN</button>
+      <button class="langbtn" data-lang="ro" aria-pressed="false">RO</button>
+      <button class="langbtn" data-lang="sr-cyrl" aria-pressed="false">ЋИР</button>
+      <button class="langbtn" data-lang="sr-latn" aria-pressed="false">SR</button>
+    </div>
+    <button class="iconbtn" id="themebtn" title="">🌓</button>
+  </div>
+
+  <div class="card">
+    <header class="hero">
+      <span class="kicker">quiz.freehtml.dev</span>
+      <h1><span data-i="h1">Free quizzes, checked answers</span></h1>
+      <p class="lede" data-i="lede">Short, honest quizzes about film, music, sport and internet culture. Every answer explained, every fact with a source and the date it was checked.</p>
+    </header>
+    <main>
+      <section id="list">
+        <h2 data-i="listH">Pick a quiz</h2>
+        <div id="cards"></div>
+        <p class="more" data-i="more">More quizzes are coming - each one checked before it ships.</p>
+      </section>
+      <section id="promise">
+        <h2 data-i="howH">Why these quizzes</h2>
+        <div class="howto"><ul>
+          <li data-i="how1">Every option gets explained: why the right answer is right, and why the traps are traps.</li>
+          <li data-i="how2">Every fact carries a source and the date it was checked. No "trust me" - you can verify.</li>
+          <li data-i="how3">Each quiz is a single HTML file. No account, no ads, no tracking - works offline.</li>
+        </ul></div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <span data-i="offlineNote">Everything here runs only in your browser. No account, no ads, no tracking.</span><br>
+    <span data-i="supportText">The quizzes are free and stay free.</span>
+    <a href="https://PayPal.me/TekiDeki" target="_blank" rel="noopener">❤️ <span data-i="supportLink">Support the work</span></a>
+    <span class="sep">·</span>
+    <a href="https://github.com/TekiDeki" target="_blank" rel="noopener" data-i="report">Spotted a mistake? Tell me.</a>
+    <span class="sep">·</span>
+    <a href="https://freehtml.dev" target="_blank" rel="noopener" data-i="partOf">Part of freehtml.dev</a>
+  </footer>
+</div>
+
+<script>
+"use strict";
+/* ---------- i18n ---------- */
+var L={
+"en":{
+ h1:"Free quizzes, checked answers",
+ lede:"Short, honest quizzes about film, music, sport and internet culture. Every answer explained, every fact with a source and the date it was checked.",
+ listH:"Pick a quiz",
+ howH:"Why these quizzes",
+ how1:"Every option gets explained: why the right answer is right, and why the traps are traps.",
+ how2:"Every fact carries a source and the date it was checked. No \"trust me\" - you can verify.",
+ how3:"Each quiz is a single HTML file. No account, no ads, no tracking - works offline.",
+ pillQ:"questions", pillL:"languages",
+ more:"More quizzes are coming - each one checked before it ships.",
+ offlineNote:"Everything here runs only in your browser. No account, no ads, no tracking.",
+ supportText:"The quizzes are free and stay free.", supportLink:"Support the work",
+ report:"Spotted a mistake? Tell me.", partOf:"Part of freehtml.dev",
+ theme:"Switch theme",
+ cards:{q1t:"Celebrity IQ Test",
+        q1d:"Fifteen questions about film, music, sport and internet culture. Three answers each, one right - and every option explained."}
+},
+"ro":{
+ h1:"Quiz-uri gratuite, răspunsuri verificate",
+ lede:"Quiz-uri scurte și oneste despre film, muzică, sport și cultura internetului. Fiecare răspuns explicat, fiecare fapt cu sursă și data la care a fost verificat.",
+ listH:"Alege un quiz",
+ howH:"De ce aceste quiz-uri",
+ how1:"Fiecare variantă e explicată: de ce răspunsul corect e corect și de ce capcanele sunt capcane.",
+ how2:"Fiecare fapt are sursa și data la care a fost verificat. Fără „ai încredere\" - poți verifica.",
+ how3:"Fiecare quiz e un singur fișier HTML. Fără cont, fără reclame, fără urmărire - merge offline.",
+ pillQ:"întrebări", pillL:"limbi",
+ more:"Vin mai multe quiz-uri - fiecare verificat înainte de publicare.",
+ offlineNote:"Tot ce e aici rulează doar în browserul tău. Fără cont, fără reclame, fără urmărire.",
+ supportText:"Quiz-urile sunt gratuite și rămân gratuite.", supportLink:"Susține munca",
+ report:"Ai văzut o greșeală? Spune-mi.", partOf:"Parte din freehtml.dev",
+ theme:"Schimbă tema",
+ cards:{q1t:"Testul vedetelor",
+        q1d:"Cincisprezece întrebări despre film, muzică, sport și cultura internetului. Câte trei răspunsuri, unul singur corect - și fiecare variantă explicată."}
+},
+"sr-cyrl":{
+ h1:"Бесплатни квизови, проверени одговори",
+ lede:"Кратки и поштени квизови о филму, музици, спорту и интернет култури. Сваки одговор објашњен, свака чињеница са извором и датумом провере.",
+ listH:"Изабери квиз",
+ howH:"Зашто ови квизови",
+ how1:"Свака опција се објашњава: зашто је добар добар одговор, а зашто су замке замке.",
+ how2:"Свака чињеница носи извор и датум провере. Без „веруј ми“ — можеш проверити.",
+ how3:"Сваки квиз је један HTML фајл. Без налога, без реклама, без праћења — ради и без интернета.",
+ pillQ:"питања", pillL:"језика",
+ more:"Долази више квизова — сваки проверен пре објаве.",
+ offlineNote:"Све овде ради само у вашем прегледачу. Без налога, без реклама, без праћења.",
+ supportText:"Квизови су бесплатни и остају бесплатни.", supportLink:"Подржи рад",
+ report:"Видиш грешку? Реци ми.", partOf:"Део freehtml.dev",
+ theme:"Промени тему",
+ cards:{q1t:"Квиз о славнима",
+        q1d:"Петнаест питања из филма, музике, спорта и интернет културе. По три одговора, само један тачан — и свака опција објашњена."}
+},
+"sr-latn":{
+ h1:"Besplatni kvizovi, provereni odgovori",
+ lede:"Kratki i pošteni kvizovi o filmu, muzici, sportu i internet kulturi. Svaki odgovor objašnjen, svaka činjenica sa izvorom i datumom provere.",
+ listH:"Izaberi kviz",
+ howH:"Zašto ovi kvizovi",
+ how1:"Svaka opcija se objašnjava: zašto je dobar dobar odgovor, a zašto su zamke zamke.",
+ how2:"Svaka činjenica nosi izvor i datum provere. Bez „veruj mi“ — možeš proveriti.",
+ how3:"Svaki kviz je jedan HTML fajl. Bez naloga, bez reklama, bez praćenja — radi i bez interneta.",
+ pillQ:"pitanja", pillL:"jezika",
+ more:"Dolazi više kvizova — svaki proveren pre objave.",
+ offlineNote:"Sve ovde radi samo u vašem pregledaču. Bez naloga, bez reklama, bez praćenja.",
+ supportText:"Kvizovi su besplatni i ostaju besplatni.", supportLink:"Podrži rad",
+ report:"Vidiš grešku? Reci mi.", partOf:"Deo freehtml.dev",
+ theme:"Promeni temu",
+ cards:{q1t:"Kviz o slavnima",
+        q1d:"Petnaest pitanja iz filma, muzike, sporta i internet kulture. Po tri odgovora, samo jedan tačan — i svaka opcija objašnjena."}
+}};
+
+/* ---------- quizzes: card list (i18n text lives in L.cards) ---------- */
+var QUIZZES=[
+ {href:"./celebrity-iq-test/", emoji:"🎬", t:"q1t", d:"q1d", n:15, mins:3}
+];
+
+/* ---------- state ---------- */
+var LANGS=["en","ro","sr-cyrl","sr-latn"];
+var lang="en";
+var $=function(s){return document.querySelector(s)};
+function t(k){var v=L[lang][k];return typeof v==="string"?v:k}
+/* același prefix „ciq-“ ca la quiz-uri: hub-ul și quiz-urile își împart limba și tema (același origin) */
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem("ciq-"+k)||"null");localStorage.setItem("ciq-"+k,JSON.stringify(v))}catch(e){return null}}
+
+/* ---------- language & theme ---------- */
+function detectLang(){
+  var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||"en"];
+  for(var i=0;i<ls.length;i++){var l=(ls[i]||"").toLowerCase();
+    if(l.indexOf("ro")===0)return"ro";
+    if(l.indexOf("sr")===0)return l.indexOf("latn")>-1?"sr-latn":"sr-cyrl";
+  }
+  return"en";
+}
+function setLang(l){
+  lang=LANGS.indexOf(l)>-1?l:"en"; store("lang",lang);
+  document.documentElement.lang=lang==="sr-cyrl"?"sr-Cyrl":(lang==="sr-latn"?"sr-Latn":lang);
+  var btns=document.querySelectorAll(".langbtn");
+  for(var i=0;i<btns.length;i++)btns[i].setAttribute("aria-pressed",btns[i].getAttribute("data-lang")===lang?"true":"false");
+  var els=document.querySelectorAll("[data-i]");
+  for(var j=0;j<els.length;j++){var k=els[j].getAttribute("data-i");if(L[lang][k]!==undefined)els[j].textContent=L[lang][k]}
+  var tb=$("#themebtn"); tb.title=t("theme"); tb.setAttribute("aria-label",tb.title);
+  renderCards();
+}
+function setTheme(th){document.documentElement.setAttribute("data-theme",th);store("theme",th);
+  var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",th==="dark"?"#131020":"#f6f3ec")}
+
+/* ---------- cards ---------- */
+function renderCards(){
+  var box=$("#cards"); if(!box)return;
+  var html="";
+  for(var i=0;i<QUIZZES.length;i++){
+    var q=QUIZZES[i];
+    html+='<a class="qcard" href="'+q.href+'">'
+        +'<span class="qemoji">'+q.emoji+'</span>'
+        +'<span class="qb"><span class="qtitle"></span><span class="qdesc"></span>'
+        +'<span class="qmeta"><span class="pill"><b>'+q.n+'</b> '+t("pillQ")+'</span>'
+        +'<span class="pill">≈'+q.mins+' min</span>'
+        +'<span class="pill"><b>4</b> '+t("pillL")+'</span></span></span>'
+        +'<span class="qgo">→</span></a>';
+  }
+  box.innerHTML=html;
+  var cards=box.querySelectorAll(".qcard");
+  for(var j=0;j<cards.length;j++){
+    var qz=QUIZZES[j];
+    cards[j].querySelector(".qtitle").textContent=L[lang].cards[qz.t];
+    cards[j].querySelector(".qdesc").textContent=L[lang].cards[qz.d];
+  }
+}
+
+/* ---------- wiring ---------- */
+document.querySelectorAll(".langbtn").forEach(function(b){
+  b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"))});
+});
+$("#themebtn").addEventListener("click",function(){
+  setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
+});
+
+/* init */
+(function(){
+  setTheme(store("theme")||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  setLang(store("lang")||detectLang());
+})();
+</script>
+</body>
+</html>
