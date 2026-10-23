@@ -46,6 +46,8 @@ body{
 .iconbtn{border-radius:50%;width:36px;height:36px;padding:0;font-size:1rem;display:flex;align-items:center;justify-content:center}
 .langbtn:hover,.iconbtn:hover{color:var(--text);border-color:var(--accent)}
 .langbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.homelink{display:inline-flex;align-items:center;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.03em;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;min-height:34px;text-decoration:none;transition:.15s}
+.homelink:hover{color:var(--text);border-color:var(--accent)}
 button:focus-visible,a:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:8px}
 .card{
   background:var(--panel);border:1px solid var(--line);border-radius:22px;
@@ -163,6 +165,7 @@ footer .sep{margin:0 7px;opacity:.45}
 <body>
 <div class="wrap">
   <div class="topbar">
+    <a class="homelink" href="../">← <span data-i="home">Home</span></a>
     <div class="langs" role="group" aria-label="Language">
       <button class="langbtn" data-lang="en" aria-pressed="false">EN</button>
       <button class="langbtn" data-lang="ro" aria-pressed="false">RO</button>
@@ -253,7 +256,7 @@ footer .sep{margin:0 7px;opacity:.45}
 /* ---------- i18n ---------- */
 var L={
 "en":{
- h1:"Celebrity IQ Test", lede:"Fifteen questions, three answers each. Every fact comes with an explanation, a source and the date it was checked.",
+ h1:"Celebrity IQ Test", home:"Home", lede:"Fifteen questions, three answers each. Every fact comes with an explanation, a source and the date it was checked.",
  pillQ:"questions", pillE:"every answer explained", pillL:"4 languages", pillP:"runs only in your browser",
  howH:"How it works",
  how1:"You get 15 questions about film, music, sport and internet culture. Three answers each, only one is right.",
@@ -275,7 +278,7 @@ var L={
  supportText:"The quiz is free and stays free.", supportLink:"Support the work", report:"Spotted a mistake? Tell me."
 },
 "ro":{
- h1:"Testul vedetelor", lede:"Cincisprezece întrebări, câte trei răspunsuri. Fiecare fapt are explicație, sursă și data la care a fost verificat.",
+ h1:"Testul vedetelor", home:"Acasă", lede:"Cincisprezece întrebări, câte trei răspunsuri. Fiecare fapt are explicație, sursă și data la care a fost verificat.",
  pillQ:"întrebări", pillE:"fiecare răspuns explicat", pillL:"4 limbi", pillP:"rulează doar în browserul tău",
  howH:"Cum funcționează",
  how1:"Primești 15 întrebări despre film, muzică, sport și cultura internetului. Câte trei răspunsuri, unul singur corect.",
@@ -297,7 +300,7 @@ var L={
  supportText:"Testul e gratuit și rămâne gratuit.", supportLink:"Susține munca", report:"Ai văzut o greșeală? Spune-mi."
 },
 "sr-cyrl":{
- h1:"Квиз о славнима", lede:"Петнаест питања, по три одговора. Свака чињеница има објашњење, извор и датум провере.",
+ h1:"Квиз о славнима", home:"Почетна", lede:"Петнаест питања, по три одговора. Свака чињеница има објашњење, извор и датум провере.",
  pillQ:"питања", pillE:"сваки одговор објашњен", pillL:"4 језика", pillP:"ради само у вашем прегледачу",
  howH:"Како ради",
  how1:"Добијаш 15 питања из филма, музике, спорта и интернет културе. По три одговора, само један тачан.",
@@ -319,7 +322,7 @@ var L={
  supportText:"Тест је бесплатан и остаје бесплатан.", supportLink:"Подржи рад", report:"Видиш грешку? Реци ми."
 },
 "sr-latn":{
- h1:"Kviz o slavnima", lede:"Petnaest pitanja, po tri odgovora. Svaka činjenica ima objašnjenje, izvor i datum provere.",
+ h1:"Kviz o slavnima", home:"Početna", lede:"Petnaest pitanja, po tri odgovora. Svaka činjenica ima objašnjenje, izvor i datum provere.",
  pillQ:"pitanja", pillE:"svaki odgovor objašnjen", pillL:"4 jezika", pillP:"radi samo u vašem pregledaču",
  howH:"Kako radi",
  how1:"Dobijaš 15 pitanja iz filma, muzike, sporta i internet kulture. Po tri odgovora, samo jedan tačan.",

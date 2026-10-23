@@ -3,6 +3,7 @@
 Folosire: python3 test_quiz.py [cale/către/index.html]
 Cerințe: playwright + chromium (pip install playwright && python3 -m playwright install chromium)
 Ieșire: „TOATE TESTELE AU TRECUT" + exit 0, sau prima eroare + exit 1.
+v4: + legătura Home spre hub (href ../ + eticheta tradusă în 4 limbi).
 """
 import os
 import sys
@@ -25,10 +26,12 @@ with sync_playwright() as p:
     pg.goto(URL); pg.wait_for_timeout(400)
 
     print("[1] Limbi")
-    for lang, h1 in [("en", "Celebrity IQ Test"), ("ro", "Testul vedetelor"),
-                     ("sr-cyrl", "Квиз о славнима"), ("sr-latn", "Kviz o slavnima")]:
+    check(pg.get_attribute(".homelink", "href") == "../", "legătura Home duce la hub (../)")
+    for lang, h1, home in [("en", "Celebrity IQ Test", "Home"), ("ro", "Testul vedetelor", "Acasă"),
+                     ("sr-cyrl", "Квиз о славнима", "Почетна"), ("sr-latn", "Kviz o slavnima", "Početna")]:
         pg.click(f'.langbtn[data-lang="{lang}"]'); pg.wait_for_timeout(120)
         check(h1 in pg.text_content("h1"), f"h1 tradus ({lang})")
+        check(pg.text_content(".homelink span").strip() == home, f"eticheta Home tradusă ({lang})")
         check(pg.evaluate("L[lang].h1.length > 3"), f"locale {lang} încărcat")
 
     print("[2] Temă")
