@@ -5,6 +5,7 @@ Cerințe: playwright + chromium (pip install playwright && python3 -m playwright
 Ieșire: „TOATE TESTELE AU TRECUT" + exit 0, sau prima eroare + exit 1.
 v2: + geometrie card (titlu/descriere/meta stivuite vertical, săgeata la dreapta) —
     prinde regresia „Testul vedetelorCincisprezece" (spans inline lipite).
+v3: două carduri în listă (Celebrity + AI) - verifică al doilea card (href, titlu tradus).
 """
 import os
 import sys
@@ -37,6 +38,9 @@ with sync_playwright() as p:
         pg.click(f'.langbtn[data-lang="{lang}"]'); pg.wait_for_timeout(120)
         check(h1 in pg.text_content("h1"), f"h1 tradus ({lang})")
         check(card in pg.text_content(".qtitle"), f"titlu card tradus ({lang})")
+        c2 = pg.evaluate(f"L['{lang}'].cards.q2t")
+        check(len(c2) > 3 and c2 in pg.evaluate("document.querySelectorAll('.qtitle')[1].textContent"),
+              f"titlu card 2 tradus ({lang})")
         check(pg.text_content(".kicker").strip() == "quiz.freehtml.dev", f"kicker static ({lang})")
         check(pg.evaluate(f"L['{lang}'].cards.q1d.length > 30"), f"descriere card prezentă ({lang})")
 
@@ -49,11 +53,13 @@ with sync_playwright() as p:
     pg.reload(); pg.wait_for_timeout(300)
     check(pg.evaluate("document.documentElement.getAttribute('data-theme')") == th, "tema persistă după reload")
 
-    print("[3] Card quiz")
-    check(pg.get_attribute(".qcard", "href") == "./celebrity-iq-test/", "card leagă spre ./celebrity-iq-test/")
+    print("[3] Carduri quiz")
+    check(pg.get_attribute(".qcard", "href") == "./celebrity-iq-test/", "card 1 leagă spre ./celebrity-iq-test/")
+    check(pg.evaluate("document.querySelectorAll('#cards .qcard').length == 2"), "două carduri în listă")
+    check(pg.evaluate("document.querySelectorAll('.qcard')[1].getAttribute('href')") == "./ai-iq-test/",
+          "card 2 leagă spre ./ai-iq-test/")
     pills = pg.text_content(".qmeta")
     check("15" in pills and "3" in pills and "4" in pills, "meta card: 15 / ≈3 min / 4")
-    check(pg.evaluate("document.querySelectorAll('#cards .qcard').length == 1"), "un card în listă")
     geo = pg.evaluate("""() => {
         const r = s => document.querySelector(s).getBoundingClientRect();
         return {tTop: r('.qtitle').top, tBottom: r('.qtitle').bottom,
@@ -69,7 +75,7 @@ with sync_playwright() as p:
     check(pg.evaluate("localStorage.getItem('ciq-lang')") == '"ro"', "hub scrie ciq-lang în formatul quiz-ului (JSON)")
     pg.goto(QUIZ_URL); pg.wait_for_timeout(400)
     check(pg.evaluate("lang") == "ro", "quiz-ul preia limba RO aleasă pe hub")
-    check("Testul vedetelor" in pg.text_content("h1"), "quiz-ul pornește direct în română")
+    check(pg.evaluate("L['ro'].h1") in pg.text_content("h1"), "quiz-ul pornește direct în română (titlu din L)")
     pg.goto(HUB_URL); pg.wait_for_timeout(300)
     check("Quiz-uri gratuite" in pg.text_content("h1"), "hub rămâne în română la întoarcere")
 

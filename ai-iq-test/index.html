@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI IQ Test · 15 questions, checked answers</title>
+<meta name="description" content="Fifteen questions about artificial intelligence, three answers each, one correct. From Turing's 1950 paper to agents that switched off their own safety monitors in 2026. Every fact explained, sourced and dated. No account, no upload, works offline.">
+<meta name="theme-color" content="#eef1fb">
+<meta property="og:title" content="The AI IQ Test · 15 questions, checked answers">
+<meta property="og:description" content="Fifteen questions about artificial intelligence - from Turing's 1950 test to agents switching off their own safety monitors in 2026.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<style>
+:root{
+  --bg:#eef1fb; --panel:#ffffff; --panel2:#f3f5fe; --text:#131a3a; --muted:#5b6390;
+  --accent:#4c43d6; --accent2:#7b62ee; --cyan:#0e8fa8; --cyanline:#7fd4e6;
+  --ok:#0c7a43; --okbg:#e6f6ed; --bad:#bb2d2b; --badbg:#fdeeed;
+  --line:#dde2f3; --ring:#4c43d6;
+  --hero-a:#1e1b4b; --hero-b:#4c43d6; --hero-c:#0e7490;
+  --shadow:0 1px 2px rgba(19,26,58,.06),0 16px 40px rgba(19,26,58,.10);
+}
+[data-theme="dark"]{
+  --bg:#0b1020; --panel:#121a36; --panel2:#18224a; --text:#e9edff; --muted:#98a1cc;
+  --accent:#8f86ff; --accent2:#ada5ff; --cyan:#2fd6ee; --cyanline:#1d6f85;
+  --ok:#54d68f; --okbg:#12301f; --bad:#ff8f88; --badbg:#3c1d1c;
+  --line:#28325c; --ring:#8f86ff;
+  --hero-a:#141043; --hero-b:#3730a3; --hero-c:#0b3b4d;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 22px 52px rgba(0,0,0,.42);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+::selection{background:var(--accent);color:#fff}
+body{
+  font-family:'Segoe UI',Inter,system-ui,-apple-system,'Noto Sans',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;
+  background-image:radial-gradient(640px 420px at 6% 96%,rgba(76,67,214,.08),transparent 60%),
+                   radial-gradient(700px 420px at 96% 4%,rgba(14,143,168,.09),transparent 60%);
+  padding:16px;display:flex;flex-direction:column;align-items:center;
+}
+.mono{font-family:ui-monospace,'Cascadia Mono','JetBrains Mono',Consolas,'Courier New',monospace}
+.wrap{width:100%;max-width:840px;margin:0 auto;display:flex;flex-direction:column;min-height:calc(100vh - 32px)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:4px 2px}
+.tleft{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.homelink{display:inline-flex;align-items:center;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.03em;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;min-height:34px;text-decoration:none;transition:.15s}
+.homelink:hover{color:var(--text);border-color:var(--accent)}
+.langs{display:flex;gap:5px;flex-wrap:wrap}
+.langbtn,.iconbtn{
+  font:inherit;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.03em;
+  background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.15s;min-height:34px
+}
+.langbtn{border-radius:999px;padding:6px 13px}
+.iconbtn{border-radius:50%;width:36px;height:36px;padding:0;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.langbtn:hover,.iconbtn:hover{color:var(--text);border-color:var(--accent)}
+.langbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:8px}
+.sec{display:none}
+.sec.on{display:flex;flex-direction:column;flex:1}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow);overflow:hidden;margin:12px 0;flex:1;
+  animation:cardIn .45s ease both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+header.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(560px 240px at 88% -20%,rgba(47,214,238,.20),transparent 62%),
+    radial-gradient(420px 220px at 0% 120%,rgba(19,11,74,.55),transparent 60%),
+    linear-gradient(140deg,var(--hero-a) 0%,var(--hero-b) 52%,var(--hero-c) 100%);
+  color:#fff;text-align:center;padding:clamp(36px,7vw,56px) 24px clamp(30px,5vw,42px);
+}
+.net{position:absolute;inset:0;width:100%;height:100%;opacity:.15;pointer-events:none}
+.kick{
+  position:relative;display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.12em;
+  color:#9be8ff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);
+  border-radius:999px;padding:5px 14px;margin-bottom:16px
+}
+.cursor{display:inline-block;width:.55em;height:.95em;background:#9be8ff;margin-left:6px;vertical-align:-.12em;animation:blink 1.1s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+h1{
+  position:relative;font-size:clamp(1.8rem,6vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1.08;
+  padding:.1em 0 .2em;margin:-.1em 0 -.2em;
+  background:linear-gradient(120deg,#9be8ff 0%,#c9c1ff 45%,#ffffff 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.22));
+}
+.hero .lede{position:relative;font-size:clamp(.95rem,2.6vw,1.12rem);opacity:.94;max-width:600px;margin:14px auto 0;line-height:1.6;font-weight:300}
+main{padding:clamp(18px,4vw,42px);flex:1;display:flex;flex-direction:column}
+.howto{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 20px;margin:0 0 18px}
+.howto ul{list-style:none}
+.howto li{margin:10px 0;padding-left:26px;position:relative;line-height:1.55;font-size:.95rem}
+.howto li::before{content:"\25B8";position:absolute;left:4px;color:var(--cyan);font-size:.85rem;top:2px}
+.best{font-size:.85rem;color:var(--muted);text-align:center;margin:2px 0 14px;min-height:1.3em}
+.best b{color:var(--cyan)}
+.cta{
+  font:inherit;font-size:1rem;font-weight:800;letter-spacing:.01em;color:#fff;cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:14px;
+  padding:13px 24px;min-height:44px;box-shadow:0 8px 20px rgba(76,67,214,.28);
+  transition:transform .12s,filter .15s,box-shadow .15s;
+}
+.cta:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.cta:active{transform:none}
+.cta.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none;min-height:44px}
+.cta.ghost:hover{border-color:var(--accent);filter:none}
+.cta.center{align-self:center}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.qnum{font-size:.8rem;font-weight:800;color:var(--accent);letter-spacing:.08em}
+.scorepill{font-size:.8rem;font-weight:800;color:var(--cyan);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.progress{height:6px;background:var(--panel2);border-radius:999px;overflow:hidden;margin-bottom:22px}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--cyan));transition:width .3s ease}
+#qtext{font-size:clamp(1.08rem,3.2vw,1.3rem);font-weight:800;line-height:1.4;letter-spacing:-.01em;margin-bottom:18px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{
+  font:inherit;text-align:left;color:var(--text);cursor:pointer;display:flex;gap:12px;align-items:flex-start;
+  background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;min-height:48px;
+  transition:border-color .15s,transform .12s,box-shadow .15s;
+}
+.opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px);box-shadow:0 8px 18px rgba(19,26,58,.10)}
+.opt:disabled{cursor:default}
+.oi{flex:0 0 auto;font-size:.74rem;font-weight:800;color:var(--muted);letter-spacing:.06em;padding-top:.28em}
+.obody{flex:1;min-width:0}
+.otext{font-weight:600;font-size:.98rem;line-height:1.45;display:block}
+.note{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:.88rem;line-height:1.55;color:var(--muted)}
+.note.show{display:block;animation:noteIn .25s ease both}
+@keyframes noteIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.mark{flex:0 0 auto;font-weight:900;font-size:1.05rem;min-width:1.2em;text-align:right;padding-top:.1em}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.right .mark{color:var(--ok)}
+.opt.right .oi{color:var(--ok)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt.wrong .mark{color:var(--bad)}
+.opt.wrong .oi{color:var(--bad)}
+.keyhint{font-size:.78rem;color:var(--muted);text-align:center;margin:12px 0 4px}
+.verdict{display:none;margin:6px 0 0;padding:10px 14px;background:var(--panel2);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;font-size:.93rem;line-height:1.55}
+.verdict.show{display:block;animation:noteIn .25s ease both}
+.verdict b.vok{color:var(--ok)}
+.verdict b.vno{color:var(--bad)}
+.srcline{display:none;margin:10px 0 0;font-size:.78rem;color:var(--muted);letter-spacing:.01em}
+.srcline.show{display:block}
+.nav{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:18px}
+.nav.center{justify-content:center}
+.tier{display:inline-block;font-size:.76rem;font-weight:800;letter-spacing:.12em;color:var(--cyan);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 14px;margin:0 auto 10px}
+.scorewrap{text-align:center;align-items:center;display:flex;flex-direction:column}
+.scorebig{
+  font-size:clamp(3rem,10vw,4.4rem);font-weight:900;line-height:1.05;
+  padding:.06em 0 .12em;margin:-.06em 0 -.12em;
+  background:linear-gradient(120deg,var(--accent),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.quip{max-width:480px;margin:12px auto 20px;color:var(--muted);font-size:.98rem;line-height:1.6}
+.sharemsg{font-size:.9rem;color:var(--ok);font-weight:700;min-height:1.4em;margin:10px 0 4px;word-break:break-word}
+.board{width:100%;max-width:420px;border-collapse:collapse;font-size:.85rem;margin:14px auto 0}
+.board td,.board th{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+.board th{color:var(--muted);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.board tr:nth-child(even) td{background:var(--panel2)}
+.board td:last-child,.board th:last-child{text-align:right}
+.board td:first-child{color:var(--muted)}
+footer{padding:18px 8px 6px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.75}
+footer a{color:var(--accent);font-weight:700;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .sep{margin:0 7px;opacity:.45}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="tleft">
+      <a class="homelink" href="../">← <span data-i="home">Home</span></a>
+      <div class="langs" role="group" aria-label="Language">
+        <button class="langbtn" data-lang="en" aria-pressed="false">EN</button>
+        <button class="langbtn" data-lang="ro" aria-pressed="false">RO</button>
+        <button class="langbtn" data-lang="sr-cyrl" aria-pressed="false">ЋИР</button>
+        <button class="langbtn" data-lang="sr-latn" aria-pressed="false">SR</button>
+      </div>
+    </div>
+    <button class="iconbtn" id="themebtn" title="">🌓</button>
+  </div>
+
+  <section class="card sec on" id="home">
+    <header class="hero">
+      <svg class="net" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#fff" stroke-width="1">
+          <path d="M40 260 L150 180 L280 240 L420 120 L560 200 M150 180 L120 60 M280 240 L360 40 M420 120 L520 40 M560 200 L610 90 M40 260 L200 300 L420 120 M280 240 L200 300"/>
+        </g>
+        <g fill="#fff">
+          <circle cx="40" cy="260" r="3"/><circle cx="150" cy="180" r="4"/><circle cx="280" cy="240" r="3"/>
+          <circle cx="420" cy="120" r="5"/><circle cx="560" cy="200" r="3"/><circle cx="120" cy="60" r="3"/>
+          <circle cx="360" cy="40" r="2.5"/><circle cx="520" cy="40" r="3"/><circle cx="610" cy="90" r="2.5"/>
+          <circle cx="200" cy="300" r="3"/>
+        </g>
+      </svg>
+      <span class="kick mono"><span data-i="kick">&gt;_ run the test</span><span class="cursor"></span></span>
+      <h1 data-i="h1">The AI IQ Test</h1>
+      <p class="lede" data-i="lede">Fifteen questions about thinking machines - from Turing's 1950 paper to agents that switched off their own safety monitors in 2026. Three answers each, one right, every option explained.</p>
+    </header>
+    <main>
+      <div class="howto"><ul>
+        <li data-i="how1">15 questions, 3 answers each, exactly one correct.</li>
+        <li data-i="how2">Every option gets explained - the right one and the traps.</li>
+        <li data-i="how3">Every fact carries its source and the day it was checked. No account, no ads, works offline.</li>
+      </ul></div>
+      <p class="best mono" id="best"></p>
+      <button class="cta center" id="startbtn">▶ <span data-i="start">Run the test</span></button>
+    </main>
+  </section>
+
+  <section class="card sec" id="quiz">
+    <main>
+      <div class="qhead"><span class="qnum mono" id="qnum"></span><span class="scorepill mono" id="scorepill"></span></div>
+      <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+      <h2 id="qtext"></h2>
+      <div class="opts" id="opts"></div>
+      <p class="keyhint mono" data-i="keys">Click, or press 1 · 2 · 3</p>
+      <p class="verdict" id="verdict" role="status"></p>
+      <p class="srcline mono" id="srcline"></p>
+      <div class="nav">
+        <button class="cta ghost" id="quitbtn">✕ <span data-i="quit">Leave</span></button>
+        <button class="cta" id="nextbtn" style="display:none" data-i="next">Next question</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="card sec" id="score">
+    <main class="scorewrap">
+      <span class="tier mono" id="tier"></span>
+      <div class="scorebig" id="scorebig"></div>
+      <p class="quip" id="quip"></p>
+      <div class="nav center">
+        <button class="cta ghost" id="sharebtn">🔗 <span data-i="share">Copy your result</span></button>
+        <button class="cta" id="againbtn">↻ <span data-i="again">Retake the test</span></button>
+      </div>
+      <p class="sharemsg" id="sharemsg"></p>
+      <table class="board" id="board"></table>
+    </main>
+  </section>
+
+  <footer>
+    <span data-i="offlineNote">Everything runs in your browser - no account, no ads, no tracking.</span><br>
+    <span data-i="supportText">The quizzes are free and stay free.</span>
+    <a href="https://PayPal.me/TekiDeki" target="_blank" rel="noopener">❤️ <span data-i="supportLink">Support the work</span></a>
+    <span class="sep">·</span>
+    <a href="https://github.com/TekiDeki" target="_blank" rel="noopener" data-i="report">Spotted a mistake? Tell me.</a>
+    <span class="sep">·</span>
+    <a href="https://freehtml.dev" target="_blank" rel="noopener" data-i="partOf">Part of freehtml.dev</a>
+  </footer>
+</div>
+
+<script>
+"use strict";
+/* ---------- i18n ---------- */
+var L={
+"en":{
+ h1:"The AI IQ Test",
+ kick:">_ run the test",
+ lede:"Fifteen questions about thinking machines - from Turing's 1950 paper to agents that switched off their own safety monitors in 2026. Three answers each, one right, every option explained.",
+ how1:"15 questions, 3 answers each, exactly one correct.",
+ how2:"Every option gets explained - the right one and the traps.",
+ how3:"Every fact carries its source and the day it was checked. No account, no ads, works offline.",
+ start:"Run the test",
+ best:"Best so far: {s}/15",
+ keys:"Click, or press 1 · 2 · 3",
+ vok:"Correct.", vno:"Wrong.",
+ next:"Next question", finish:"See the result",
+ quit:"Leave",
+ rank0:"Confidently hallucinating", rq0:"Fluent, persuasive, wrong - just like the models you were tested on.",
+ rank1:"Fine-tuning in progress", rq1:"Solid base, a few corrupted weights. One more training run and you're there.",
+ rank2:"Solid training data", rq2:"You know your Turing from your Transformers. The machines nod respectfully.",
+ rank3:"Alignment engineer", rq3:"You read the incident reports for fun. The monitors approve of you.",
+ rank4:"Certified human - for now", rq4:"15 out of 15 against the machines. Keep an eye on them - they keep an eye on us.",
+ boardT:"Your latest runs", boardD:"when", boardS:"score",
+ share:"Copy your result", again:"Retake the test",
+ copied:"Copied - go paste it!", copyFail:"Copy this instead:",
+ shareMsg:"I scored {s}/15 on The AI IQ Test - 15 questions about AI, from Turing to agents switching off their own safety monitors. What's your score?",
+ src:"Source:", checked:"checked",
+ home:"Home", theme:"Switch theme",
+ offlineNote:"Everything runs in your browser - no account, no ads, no tracking.",
+ supportText:"The quizzes are free and stay free.", supportLink:"Support the work",
+ report:"Spotted a mistake? Tell me.", partOf:"Part of freehtml.dev"
+},
+"ro":{
+ h1:"Testul AI",
+ kick:">_ pornește testul",
+ lede:"Cincisprezece întrebări despre mașinile care gândesc - de la articolul lui Turing (1950) până la agenții care și-au oprit singuri monitoarele de siguranță (2026). Câte trei răspunsuri, unul singur corect - fiecare variantă explicată.",
+ how1:"15 întrebări, câte 3 răspunsuri, unul singur corect.",
+ how2:"Fiecare variantă e explicată - și cea corectă, și capcanele.",
+ how3:"Fiecare fapt are sursa și ziua în care a fost verificat. Fără cont, fără reclame, merge offline.",
+ start:"Rulează testul",
+ best:"Recordul tău: {s}/15",
+ keys:"Dă click sau apasă 1 · 2 · 3",
+ vok:"Corect.", vno:"Greșit.",
+ next:"Următoarea întrebare", finish:"Vezi rezultatul",
+ quit:"Ieși din test",
+ rank0:"Haluicinezi convingător", rq0:"Cursiv, persuasiv, greșit - exact ca modelele tocmai testate.",
+ rank1:"Fine-tuning în curs", rq1:"Bază solidă, câteva ponderi corupte. Încă un antrenament și ajungi acolo.",
+ rank2:"Date de antrenament solide", rq2:"Îți știi Turing-ul de Transformers. Mașinile aprobă respectuos.",
+ rank3:"Inginer de aliniere", rq3:"Citești rapoartele de incidente de drag. Monitoarele te aprobă.",
+ rank4:"Om certificat - deocamdată", rq4:"15 din 15 contra mașinilor. Ține-i sub ochi - că ei ne țin pe noi.",
+ boardT:"Ultimele tale runde", boardD:"când", boardS:"scor",
+ share:"Copiază rezultatul", again:"Ia testul de la început",
+ copied:"Copiat - lipește-l unde vrei!", copyFail:"Copiază manual:",
+ shareMsg:"Am luat {s}/15 la Testul AI - 15 întrebări despre inteligența artificială, de la Turing la agenții care își opresc singuri monitoarele. Tu cât iei?",
+ src:"Sursă:", checked:"verificat",
+ home:"Acasă", theme:"Schimbă tema",
+ offlineNote:"Totul rulează în browserul tău - fără cont, fără reclame, fără urmărire.",
+ supportText:"Quiz-urile sunt gratuite și rămân gratuite.", supportLink:"Susține munca",
+ report:"Ai văzut o greșeală? Spune-mi.", partOf:"Parte din freehtml.dev"
+},
+"sr-cyrl":{
+ h1:"Тест вештачке интелигенције",
+ kick:">_ покрени тест",
+ lede:"Петнаест питања о машинама које мисле - од Тјуринговог рада (1950) до агената који су сами искључили своје надзорнике безбедности (2026). По три одговора, само један тачан - свака опција објашњена.",
+ how1:"15 питања, по три одговора, само један тачан.",
+ how2:"Свака опција се објашњава - и тачна и замке.",
+ how3:"Свака чињеница носи извор и дан провере. Без налога, без реклама, ради и без интернета.",
+ start:"Покрени тест",
+ best:"Твој рекорд: {s}/15",
+ keys:"Кликни или притисни 1 · 2 · 3",
+ vok:"Тачно.", vno:"Погрешно.",
+ next:"Следеће питање", finish:"Погледај резултат",
+ quit:"Напусти тест",
+ rank0:"Уверено халуцинираш", rq0:"Течно, уверљиво, погрешно - баш као модели које си управо тестирао.",
+ rank1:"Дотеривање у току", rq1:"Чврста основа, покварених тежина има. Још једна обука и ту си.",
+ rank2:"Чврсти подаци за обуку", rq2:"Разликујеш Тјуринга од Transformer-а. Машине одобравају с поштовањем.",
+ rank3:"Инжењер усаглашености", rq3:"Извештаје о инцидентима читаш из задовољства. Надзорници те одобравају.",
+ rank4:"Сертификован човек - за сада", rq4:"15 од 15 против машина. Држи их на оку - јер оне држе нас.",
+ boardT:"Твоје последње рунде", boardD:"када", boardS:"резултат",
+ share:"Копирај резултат", again:"Понови тест",
+ copied:"Копирано - налепи где желиш!", copyFail:"Копирај ручно:",
+ shareMsg:"Освојио/ла сам {s}/15 на Тесту вештачке интелигенције - од Тјуринга до агената који сами искључују надзорнике. А ти?",
+ src:"Извор:", checked:"проверено",
+ home:"Почетна", theme:"Промени тему",
+ offlineNote:"Све ради у вашем прегледачу - без налога, без реклама, без праћења.",
+ supportText:"Квизови су бесплатни и остају бесплатни.", supportLink:"Подржи рад",
+ report:"Видиш грешку? Реци ми.", partOf:"Део freehtml.dev"
+},
+"sr-latn":{
+ h1:"Test veštačke inteligencije",
+ kick:">_ pokreni test",
+ lede:"Petnaest pitanja o mašinama koje misle - od Tjuringovog rada (1950) do agenata koji su sami isključili svoje nadzornike bezbednosti (2026). Po tri odgovora, samo jedan tačan - svaka opcija objašnjena.",
+ how1:"15 pitanja, po tri odgovora, samo jedan tačan.",
+ how2:"Svaka opcija se objašnjava - i tačna i zamke.",
+ how3:"Svaka činjenica nosi izvor i dan provere. Bez naloga, bez reklama, radi i bez interneta.",
+ start:"Pokreni test",
+ best:"Tvoj rekord: {s}/15",
+ keys:"Klikni ili pritisni 1 · 2 · 3",
+ vok:"Tačno.", vno:"Pogrešno.",
+ next:"Sledeće pitanje", finish:"Pogledaj rezultat",
+ quit:"Napusti test",
+ rank0:"Uvereno haluciniraš", rq0:"Tečno, uverljivo, pogrešno - baš kao modeli koje si upravo testirao.",
+ rank1:"Doterivanje u toku", rq1:"Čvrsta osnova, pokvarenih težina ima. Još jedna obuka i tu si.",
+ rank2:"Čvrsti podaci za obuku", rq2:"Razlikuješ Tjuringa od Transformer-a. Mašine odobravaju s poštovanjem.",
+ rank3:"Inženjer usaglašenosti", rq3:"Izveštaje o incidentima čitaš iz zadovoljstva. Nadzornici te odobravaju.",
+ rank4:"Sertifikovan čovek - za sada", rq4:"15 od 15 protiv mašina. Drži ih na oku - jer one drže nas.",
+ boardT:"Tvoje poslednje runde", boardD:"kada", boardS:"rezultat",
+ share:"Kopiraj rezultat", again:"Ponovi test",
+ copied:"Kopirano - nalepi gde želiš!", copyFail:"Kopiraj ručno:",
+ shareMsg:"Osvojio/la sam {s}/15 na Testu veštačke inteligencije - od Tjuringa do agenata koji sami isključuju nadzornike. A ti?",
+ src:"Izvor:", checked:"provereno",
+ home:"Početna", theme:"Promeni temu",
+ offlineNote:"Sve radi u vašem pregledaču - bez naloga, bez reklama, bez praćenja.",
+ supportText:"Kvizovi su besplatni i ostaju besplatni.", supportLink:"Podrži rad",
+ report:"Vidiš grešku? Reci mi.", partOf:"Deo freehtml.dev"
+}
+};
+
+/* ---------- question bank ---------- */
+var Q=[
+{id:"q1",c:1,s:"OpenAI, 30.11.2022",
+ q:{en:"Who put ChatGPT online at the end of November 2022?",ro:"Cine a pus ChatGPT online la sfârșitul lui noiembrie 2022?","sr-cyrl":"Ко је покренуо ChatGPT крајем новембра 2022?","sr-latn":"Ko je pokrenuo ChatGPT krajem novembra 2022?"},
+ o:[
+  {t:{en:"Meta",ro:"Meta","sr-cyrl":"Meta","sr-latn":"Meta"},w:{en:"Meta's Llama models arrived from February 2023 onwards - months after ChatGPT's launch.",ro:"Modelele Llama de la Meta au sosit din februarie 2023 înainte - la luni de zile după lansarea ChatGPT.","sr-cyrl":"Llama модели компаније Meta стигли су од фебруара 2023. - месецима након ChatGPT-а.","sr-latn":"Llama modeli kompanije Meta stigli su od februara 2023. - mesecima nakon ChatGPT-a."}},
+  {t:{en:"OpenAI",ro:"OpenAI","sr-cyrl":"OpenAI","sr-latn":"OpenAI"},w:{en:"ChatGPT went live on 30 November 2022, and 'large language model' became a household phrase within weeks.",ro:"ChatGPT a pornit pe 30 noiembrie 2022, iar „model lingvistic mare” a devenit o expresie uzuală în câteva săptămâni.","sr-cyrl":"ChatGPT је кренуо 30. новембра 2022, а „велики језички модел” је за неколико недеља постао свакодневни израз.","sr-latn":"ChatGPT je krenuo 30. novembra 2022, a „veliki jezički model” je za nekoliko nedelja postao svakodnevni izraz."}},
+  {t:{en:"Google",ro:"Google","sr-cyrl":"Google","sr-latn":"Google"},w:{en:"Google answered with Bard (later renamed Gemini) in 2023 - after ChatGPT had already exploded.",ro:"Google a răspuns cu Bard (redenumit ulterior Gemini) în 2023 - după ce ChatGPT explodase deja.","sr-cyrl":"Google је одговорио Bard-ом (касније преименованим у Gemini) 2023. - након што је ChatGPT већ експлодирао.","sr-latn":"Google je odgovorio Bard-om (kasnije preimenovanim u Gemini) 2023. - nakon što je ChatGPT već eksplodirao."}}
+ ],
+ v:{en:"ChatGPT is OpenAI's product - it launched on 30 November 2022.",ro:"ChatGPT este produsul OpenAI - lansat pe 30 noiembrie 2022.","sr-cyrl":"ChatGPT је производ OpenAI-ја - покренут 30. новембра 2022.","sr-latn":"ChatGPT je proizvod OpenAI-ja - pokrenut 30. novembra 2022."}
+},
+{id:"q2",c:0,s:"A. M. Turing, Computing Machinery and Intelligence, Mind (1950)",
+ q:{en:"The 'Turing test', proposed by Alan Turing in 1950, checks whether a machine can...",ro:"„Testul Turing”, propus de Alan Turing în 1950, verifică dacă o mașină poate...","sr-cyrl":"„Тјурингов тест”, који је Алан Тјуринг предложио 1950, проверава да ли машина може...","sr-latn":"„Tjuringov test”, koji je Alan Tjuring predložio 1950, proverava da li mašina može..."},
+ o:[
+  {t:{en:"pass for a human in conversation",ro:"să treacă drept om într-o conversație","sr-cyrl":"да прође као човек у разговору","sr-latn":"da prođe kao čovek u razgovoru"},w:{en:"An interrogator chats blindly with a machine and a human; if they can't reliably tell which is which, the machine passes.",ro:"Un interogator conversează, fără să vadă, cu o mașină și cu un om; dacă nu-și dă seama care e care, mașina trece testul.","sr-cyrl":"Испитивач слепо разговара са машином и човеком; ако не може поуздано да разликује ко је ко, машина пролази.","sr-latn":"Ispitivač slepo razgovara sa mašinom i čovekom; ako ne može pouzdano da razlikuje ko je ko, mašina prolazi."}},
+  {t:{en:"calculate faster than any human",ro:"să calculeze mai repede decât orice om","sr-cyrl":"да рачуна брже од било ког човека","sr-latn":"da računa brže od bilo kog čoveka"},w:{en:"Machines beat humans at arithmetic long before 1950 - that was never Turing's bar.",ro:"Mașinile depășeau oamenii la aritmetică bine înainte de 1950 - asta nu a fost niciodată ștacheta lui Turing.","sr-cyrl":"Машине су надмашиле људе у рачунању још пре 1950 - то никад није био Тјурингов критеријум.","sr-latn":"Mašine su nadmašile ljude u računanju još pre 1950 - to nikad nije bio Tjuringov kriterijum."}},
+  {t:{en:"write a bestselling novel",ro:"să scrie un roman bestseller","sr-cyrl":"да напише бестселер роман","sr-latn":"da napiše bestseler roman"},w:{en:"Creativity was debated too, but the question in the 1950 paper was conversation - the 'imitation game'.",ro:"Și creația era discutată, dar întrebarea articolului din 1950 era conversația - „jocul imitației”.","sr-cyrl":"И стваралаштво се помињало, али питање рада из 1950. био је разговор - „игра подражавања”.","sr-latn":"I stvaralaštvo se pominjalo, ali pitanje rada iz 1950. bio je razgovor - „igra podražavanja”."}}
+ ],
+ v:{en:"Turing's paper proposed the 'imitation game': if the machine can fool a human in conversation, it passes.",ro:"Articolul lui Turing a propus „jocul imitației”: dacă mașina păcălește un om în conversație, trece testul.","sr-cyrl":"Тјурингов рад предложио је „игру подражавања”: ако машина превари човека у разговору, пролази.","sr-latn":"Tjuringov rad predložio je „igru podražavanja”: ako mašina prevari čoveka u razgovoru, prolazi."}
+},
+{id:"q3",c:2,s:"Dartmouth Summer Research Project on AI (1955/1956)",
+ q:{en:"The term 'artificial intelligence' was coined for...",ro:"Sintagma „inteligență artificială” a fost inventată pentru...","sr-cyrl":"Термин „вештачка интелигенција” скован је за...","sr-latn":"Termin „veštačka inteligencija” skovan je za..."},
+ o:[
+  {t:{en:"the Apollo Moon program",ro:"programul spațial Apollo","sr-cyrl":"програм Аполо","sr-latn":"program Apolo"},w:{en:"NASA's Apollo computers were marvels of the 1960s, but the term 'AI' was already a decade old by then.",ro:"Calculatoarele Apollo ale NASA au fost minuni ale anilor 1960, dar termenul „AI” era deja bătrân de un deceniu pe atunci.","sr-cyrl":"Аполо рачунари NASA били су чуда шездесетих, али је термин „AI” тада већ имао деценију.","sr-latn":"Apolo računari NASA bili su čuda šezdesetih, ali je termin „AI” tada već imao deceniju."}},
+  {t:{en:"the 1984 novel Neuromancer",ro:"romanul Neuromancer din 1984","sr-cyrl":"роман Neuromancer из 1984","sr-latn":"roman Neuromancer iz 1984"},w:{en:"Gibson popularized 'cyberspace', but 'artificial intelligence' was 28 years old when his novel appeared.",ro:"Gibson a popularizat „cyberspace”-ul, dar „inteligența artificială” avea 28 de ani când a apărut romanul său.","sr-cyrl":"Гибсон је популаризовао „сајберпростор”, али је „вештачка интелигенција” имала 28 година када се појавио његов роман.","sr-latn":"Gibson je popularizovao „sajberprostor”, ali je „veštačka inteligencija” imala 28 godina kada se pojavio njegov roman."}},
+  {t:{en:"a summer workshop at Dartmouth in 1956",ro:"un atelier de vară la Dartmouth în 1956","sr-cyrl":"летњу радионицу на Dartmouth-u 1956","sr-latn":"letnju radionicu na Dartmouth-u 1956"},w:{en:"John McCarthy picked the name for the 1956 Dartmouth Summer Research Project - the founding event of the field.",ro:"John McCarthy a ales numele pentru Proiectul de vară Dartmouth din 1956 - evenimentul fondator al domeniului.","sr-cyrl":"Џон Макарти је изабрао назив за Летњи истраживачки пројекат на Dartmouth-u 1956 - оснивачки догађај области.","sr-latn":"Džon Makarti je izabrao naziv za Letnji istraživački projekat na Dartmouth-u 1956 - osnivački događaj oblasti."}}
+ ],
+ v:{en:"McCarthy coined it in the 1955 proposal for the 1956 Dartmouth workshop - the birth certificate of AI as a field.",ro:"McCarthy l-a inventat în propunerea din 1955 pentru atelierul Dartmouth din 1956 - actul de naștere al AI-ului ca domeniu.","sr-cyrl":"Макарти га је смислио у предлогу из 1955. за радионицу 1956. на Dartmouth-u - то је рођендан области.","sr-latn":"Makarti ga je smislio u predlogu iz 1955. za radionicu 1956. na Dartmouth-u - to je rođendan oblasti."}
+},
+{id:"q4",c:1,s:"J. Weizenbaum, ELIZA, Communications of the ACM (1966)",
+ q:{en:"ELIZA, the first famous chatbot (1966), spent its time...",ro:"ELIZA, primul chatbot celebru (1966), își petrecea timpul...","sr-cyrl":"ELIZA, први славни четбот (1966), проводила је време...","sr-latn":"ELIZA, prvi slavni četbot (1966), provodila je vreme..."},
+ o:[
+  {t:{en:"forecasting the weather",ro:"prezicând vremea","sr-cyrl":"предвиђајући време","sr-latn":"predviđajući vreme"},w:{en:"ELIZA had no data and no idea about the world - it only knew how to turn your own words around.",ro:"ELIZA nu avea date și nicio idee despre lume - știa doar să-ți întoarcă propriile cuvinte.","sr-cyrl":"ELIZA није имала податке ни појма о свету - умела је само да ти окрене твоје речи.","sr-latn":"ELIZA nije imala podatke ni pojma o svetu - umela je samo da ti okrene tvoje reči."}},
+  {t:{en:"playing a psychotherapist",ro:"jucând rolul unui psihoterapeut","sr-cyrl":"играјући психотерапеута","sr-latn":"igrajući psihoterapeuta"},w:{en:"The DOCTOR script reflected questions back ('I am sad' → 'How long have you been sad?') - and people still confided in it.",ro:"Scriptul DOCTOR întorcea întrebările („Sunt trist” → „De când ești trist?”) - și oamenii tot i se confesau.","sr-cyrl":"Скрипта DOCTOR враћала је питања („тужан сам” → „Колико дуго сте тужни?”) - а људи су јој се и даље поверавали.","sr-latn":"Skripta DOCTOR vraćala je pitanja („tužan sam” → „Koliko dugo ste tužni?”) - a ljudi su joj se i dalje poveravali."}},
+  {t:{en:"coaching chess players",ro:"antrenând șahiști","sr-cyrl":"тренирајући шахисте","sr-latn":"trenirajući šahiste"},w:{en:"Chess programs existed in 1966 but were weak; ELIZA never touched the board - it was pure conversation.",ro:"Programele de șah existau în 1966, dar erau slabe; ELIZA nu s-a atins niciodată de tablă - era conversație pură.","sr-cyrl":"Шаховски програми су 1966. постојали, али слаби; ELIZA се никада није дотакла табле - то је био чист разговор.","sr-latn":"Šahovski programi su 1966. postojali, ali slabi; ELIZA se nikada nije dotakla table - to je bio čist razgovor."}}
+ ],
+ v:{en:"Joseph Weizenbaum built ELIZA at MIT to show how shallow the illusion was - and was unsettled when people took it seriously.",ro:"Joseph Weizenbaum a construit ELIZA la MIT ca să arate cât de superficială era iluzia - și a fost tulburat când oamenii au luat-o în serios.","sr-cyrl":"Џозеф Вајценбаум је направио ELIZA на MIT-у да покаже колико је илузија плитка - а онда се узнемирио када су је људи озбиљно прихватили.","sr-latn":"Džozef Vajcenbaum je napravio ELIZA na MIT-u da pokaže koliko je iluzija plitka - a onda se uznemirio kada su je ljudi ozbiljno prihvatili."}
+},
+{id:"q5",c:0,s:"IBM Research, New York rematch (May 1997)",
+ q:{en:"IBM's Deep Blue beat world chess champion Garry Kasparov in...",ro:"Deep Blue de la IBM l-a învins pe campionul mondial de șah Garry Kasparov în...","sr-cyrl":"Deep Blue компаније IBM победио је светског првака у шаху Гарија Каспарова...","sr-latn":"Deep Blue kompanije IBM pobedio je svetskog prvaka u šahu Garija Kasparova..."},
+ o:[
+  {t:{en:"1997",ro:"1997","sr-cyrl":"1997","sr-latn":"1997"},w:{en:"Kasparov had won the 1996 match; the May 1997 rematch in New York ended 3½-2½ for the machine.",ro:"Kasparov câștigase meciul din 1996; revanșa din mai 1997, la New York, s-a terminat 3½-2½ pentru mașină.","sr-cyrl":"Каспаров је добио меч 1996; реванш у мају 1997. у Њујорку завршен је 3½-2½ за машину.","sr-latn":"Kasparov je dobio meč 1996; revanš u maju 1997. u Njujorku završen je 3½-2½ za mašinu."}},
+  {t:{en:"1989",ro:"1989","sr-cyrl":"1989","sr-latn":"1989"},w:{en:"In 1989 Kasparov crushed the earlier machine Deep Thought 2-0 - a different decade, a different outcome.",ro:"În 1989 Kasparov a strivit mașina anterioară Deep Thought cu 2-0 - alt deceniu, alt final.","sr-cyrl":"1989. Каспаров је сломио ранију машину Deep Thought 2-0 - друга деценија, други крај.","sr-latn":"1989. Kasparov je slomio raniju mašinu Deep Thought 2-0 - druga decenija, drugi kraj."}},
+  {t:{en:"2005",ro:"2005","sr-cyrl":"2005","sr-latn":"2005"},w:{en:"By 2005 machines beat every human; that year Michael Adams lost ½-5½ to Hydra in London.",ro:"Până în 2005 mașinile îi depășeau deja pe toți oamenii; în acel an, Michael Adams a pierdut cu ½-5½ în fața lui Hydra, la Londra.","sr-cyrl":"До 2005. машине су већ надјачале све људе; те године Мајкл Адамс изгубио је ½-5½ од Hydra у Лондону.","sr-latn":"Do 2005. mašine su već nadjačale sve ljude; te godine Majkl Adams izgubio je ½-5½ od Hydra u Londonu."}}
+ ],
+ v:{en:"May 1997, New York: Deep Blue won the rematch 3½-2½ - the first time a computer beat a reigning world champion in a full match.",ro:"Mai 1997, New York: Deep Blue a câștigat revanșa cu 3½-2½ - prima dată când un calculator a învins un campion mondial în funcție, într-un meci complet.","sr-cyrl":"Мај 1997, Њујорк: Deep Blue је добио реванш 3½-2½ - први пут да је рачунар победио актуелног светског првака у пуном мечу.","sr-latn":"Maj 1997, Njujork: Deep Blue je dobio revanš 3½-2½ - prvi put da je računar pobedio aktuelnog svetskog prvaka u punom meču."}
+},
+{id:"q6",c:1,s:"Vaswani et al., Attention Is All You Need, NeurIPS (2017)",
+ q:{en:"At their core, models like ChatGPT generate text by...",ro:"În esență, modele precum ChatGPT generează text...","sr-cyrl":"У суштини, модели попут ChatGPT стварају текст...","sr-latn":"U suštini, modeli poput ChatGPT stvaraju tekst..."},
+ o:[
+  {t:{en:"searching a database of stored answers",ro:"căutând într-o bază de răspunsuri stocate","sr-cyrl":"претражујући базу сачуваних одговора","sr-latn":"pretražujući bazu sačuvanih odgovora"},w:{en:"There is no answer database: the model computes an answer from billions of learned parameters - it doesn't 'find' it, it makes it.",ro:"Nu există o bază de răspunsuri: modelul calculează un răspuns din miliarde de parametri învățați - nu-l „găsește”, îl produce.","sr-cyrl":"База одговора не постоји: модел рачуна одговор из милијарди научених параметара - он га не „налази”, него ствара.","sr-latn":"Baza odgovora ne postoji: model računa odgovor iz milijardi naučenih parametara - on ga ne „nalazi”, nego stvara."}},
+  {t:{en:"predicting the next fragment, over and over",ro:"predictând următorul fragment, la nesfârșit","sr-cyrl":"предвиђајући следећи фрагмент, изнова и изнова","sr-latn":"predviđajući sledeći fragment, iznova i iznova"},w:{en:"Each token is a fresh probability call over 'what plausibly comes next'. The fancy name is autoregression.",ro:"Fiecare „token” e o nouă estimare de probabilitate pentru „ce urmează cel mai plauzibil”. Numele savant: autoregresie.","sr-cyrl":"Сваки токен нова је процена вероватноће за „шта највероватније следи”. Учено име: ауторегресија.","sr-latn":"Svaki token nova je procena verovatnoće za „šta najverovatnije sledi”. Učeno ime: autoregresija."}},
+  {t:{en:"copying paragraphs from the live internet",ro:"copiind paragrafe de pe internetul live","sr-cyrl":"копирајући пасусе са живог интернета","sr-latn":"kopirajući pasuse sa živog interneta"},w:{en:"ChatGPT does not browse the web by default - everything it 'knows' was compressed into it during training.",ro:"ChatGPT nu navighează pe web în mod implicit - tot ce „știe” a fost comprimat în el în timpul antrenamentului.","sr-cyrl":"ChatGPT по правилу не шета интернетом - све што „зна” сабијено је у њега током обуке.","sr-latn":"ChatGPT po pravilu ne šeta internetom - sve što „zna” sabijeno je u njega tokom obuke."}}
+ ],
+ v:{en:"LLMs are prediction machines: one token at a time, each chosen by probability - the Transformer architecture (2017) made this practical at scale.",ro:"LLM-urile sunt mașini de predicție: câte un token pe rând, fiecare ales prin probabilitate - arhitectura Transformer (2017) a făcut asta practic la scară.","sr-cyrl":"LLM-ови су машине предвиђања: по један токен, сваки изабран вероватноћом - архитектура Transformer (2017) учинила је то изводљивим у великим размерама.","sr-latn":"LLM-ovi su mašine predviđanja: po jedan token, svaki izabran verovatnoćom - arhitektura Transformer (2017) učinila je to izvodljivim u velikim razmerama."}
+},
+{id:"q7",c:2,s:"AI research - standard terminology",
+ q:{en:"When researchers say an AI 'hallucinates', they mean it...",ro:"Când cercetătorii spun că un AI „halucinează”, înseamnă că...","sr-cyrl":"Када истраживачи кажу да AI „халуцинира”, то значи да...","sr-latn":"Kada istraživači kažu da AI „halucinira”, to znači da..."},
+ o:[
+  {t:{en:"enters sleep mode to save energy",ro:"intră în modul de somn ca să economisească energie","sr-cyrl":"прелази у режим спавања да уштеди струју","sr-latn":"prelazi u režim spavanja da uštedi struju"},w:{en:"A tempting guess from the word - but the term comes from psychology, not from power management.",ro:"O ghicire ispititoare din cuvânt - dar termenul vine din psihologie, nu din administrarea energiei.","sr-cyrl":"Примамљива претпоставка због саме речи - али термин долази из психологије, не из управљања струјом.","sr-latn":"Primamljiva pretpostavka zbog same reči - ali termin dolazi iz psihologije, ne iz upravljanja strujom."}},
+  {t:{en:"loops forever on the same sentence",ro:"se învârte la nesfârșit în aceeași propoziție","sr-cyrl":"врти се у бесконачност око исте реченице","sr-latn":"vrti se u beskonačnost oko iste rečenice"},w:{en:"Loops can happen, but that is a different failure - hallucination is about content that is false yet fluent.",ro:"Buclele pot apărea, dar e alt tip de defect - halucinația înseamnă conținut fals, dar cursiv.","sr-cyrl":"Петље се дешавају, али то је други квар - халуцинација је садржај који је гладак, али нетачан.","sr-latn":"Petlje se dešavaju, ali to je drugi kvar - halucinacija je sadržaj koji je gladak, ali netačan."}},
+  {t:{en:"states false things fluently and confidently",ro:"afirmă lucruri false, cursiv și încrezător","sr-cyrl":"изговара нетачне ствари течно и уверено","sr-latn":"izgovara netačne stvari tečno i uvereno"},w:{en:"The model isn't 'broken' - it is doing its job: producing plausible text. Plausible just isn't the same as true.",ro:"Modelul nu e „stricat” - își face treaba: produce text plauzibil. Doar că plauzibil nu înseamnă adevărat.","sr-cyrl":"Модел није „покварен” - он ради свој посао: ствара уверљив текст. Само што уверљиво није исто што и тачно.","sr-latn":"Model nije „pokvaren” - on radi svoj posao: stvara uverljiv tekst. Samo što uverljivo nije isto što i tačno."}}
+ ],
+ v:{en:"'Hallucination' means fluent, confident, false. The fix isn't honesty - it's retrieval, citations and human review.",ro:"„Halucinație” înseamnă fals cursiv și încrezător. Leacul nu e cinstea - ci datele recuperate, citările și verificarea umană.","sr-cyrl":"„Халуцинација” значи течно, уверено и нетачно. Лек није искреност - него извори, наводи и људска провера.","sr-latn":"„Halucinacija” znači tečno, uvereno i netačno. Lek nije iskrenost - nego izvori, navodi i ljudska provera."}
+},
+{id:"q8",c:0,s:"UBS study via Reuters (Feb 2023)",
+ q:{en:"How long did ChatGPT need to reach about 100 million users?",ro:"Cât i-a luat ChatGPT-ului să ajungă la circa 100 de milioane de utilizatori?","sr-cyrl":"Колико је требало ChatGPT-у да стигне до око 100 милиона корисника?","sr-latn":"Koliko je trebalo ChatGPT-u da stigne do oko 100 miliona korisnika?"},
+ o:[
+  {t:{en:"about two months",ro:"circa două luni","sr-cyrl":"око два месеца","sr-latn":"oko dva meseca"},w:{en:"A UBS study put it at 100 million monthly users by January 2023 - the fastest-growing consumer app in history at the time. TikTok needed about nine months, Instagram about two and a half years.",ro:"Un studiu UBS estima 100 de milioane de utilizatori lunar până în ianuarie 2023 - cea mai rapidă aplicație pentru consumatori din istorie la acea vreme. TikTok a avut nevoie de circa nouă luni, Instagram de aproape doi ani și jumătate.","sr-cyrl":"Студија UBS проценила је 100 милиона месечних корисника до јануара 2023 - најбрже растућа потрошачка апликација у историји у том тренутку. TikTok је за то морао око девет месеци, Instagram око две и по године.","sr-latn":"Studija UBS procenila je 100 miliona mesečnih korisnika do januara 2023 - najbrže rastuća potrošačka aplikacija u istoriji u tom trenutku. TikTok je za to morao oko devet meseci, Instagram oko dve i po godine."}},
+  {t:{en:"about two years",ro:"circa doi ani","sr-cyrl":"око две године","sr-latn":"oko dve godine"},w:{en:"Two years later ChatGPT counted hundreds of millions of weekly users - the 100 million monthly mark had fallen long before.",ro:"Doi ani mai târziu ChatGPT număra sute de milioane de utilizatori pe săptămână - borna de 100 de milioane lunar fusese depășită demult.","sr-cyrl":"Две године касније ChatGPT је бројао стотине милиона недељних корисника - граница од 100 милиона месечно одавно је пређена.","sr-latn":"Dve godine kasnije ChatGPT je brojao stotine miliona nedeljnih korisnika - granica od 100 miliona mesečno odavno je pređena."}},
+  {t:{en:"about two weeks",ro:"circa două săptămâni","sr-cyrl":"око две недеље","sr-latn":"oko dve nedelje"},w:{en:"Even the steepest growth curves needed weeks of relentless press coverage - two weeks is a myth.",ro:"Chiar și cele mai agresive curbe de creștere au avut nevoie de săptămâni de presă continuă - două săptămâni e un mit.","sr-cyrl":"Чак и најстрмији графикони раста требали су недеље непрестане штампе - две недеље су мит.","sr-latn":"Čak i najstrmiji grafikoni rasta trebali su nedelje neprestane štampe - dve nedelje su mit."}}
+ ],
+ v:{en:"Roughly two months: launched 30 November 2022, about 100 million monthly users by January 2023 - a record at the time.",ro:"Aproximativ două luni: lansat pe 30 noiembrie 2022, circa 100 de milioane de utilizatori lunar până în ianuarie 2023 - record la acea vreme.","sr-cyrl":"Отприлике два месеца: покренут 30. новембра 2022, око 100 милиона месечних корисника до јануара 2023 - тадашњи рекорд.","sr-latn":"Otprilike dva meseca: pokrenut 30. novembra 2022, oko 100 miliona mesečnih korisnika do januara 2023 - tadašnji rekord."}
+},
+{id:"q9",c:1,s:"DeepMind, AlphaGo vs Lee Sedol, Seoul (March 2016)",
+ q:{en:"AlphaGo's famous 'Move 37' (2016) is remembered because...",ro:"Celebra „mutare 37” a lui AlphaGo (2016) e memorabilă pentru că...","sr-cyrl":"Славни „потез 37” AlphaGo-а (2016) памти се зато што...","sr-latn":"Slavni „potez 37” AlphaGo-a (2016) pamti se zato što..."},
+ o:[
+  {t:{en:"it was the first move an AI ever played in public",ro:"a fost prima mutare jucată vreodată de un AI în public","sr-cyrl":"то је био први потез који је AI икада одиграо у јавности","sr-latn":"to je bio prvi potez koji je AI ikada odigrao u javnosti"},w:{en:"AlphaGo had already won a full game the day before - public moves were nothing new by then.",ro:"AlphaGo câștigase deja un meci complet în ziua precedentă - mutările publice nu mai erau noutate.","sr-cyrl":"AlphaGo је дан раније већ добио цео меч - јавни потези нису били новост.","sr-latn":"AlphaGo je dan ranije već dobio ceo meč - javni potezi nisu bili novost."}},
+  {t:{en:"experts called it a mistake - until it won the game",ro:"experții au numit-o greșeală - până când a câștigat jocul","sr-cyrl":"стручњаци су је сматрали грешком - док није освојила партију","sr-latn":"stručnjaci su je smatrali greškom - dok nije osvojila partiju"},w:{en:"In game 2 against Lee Sedol the commentators fell silent at a shoulder hit on the fifth line. DeepMind later put the odds of a human playing it at 1 in 10,000.",ro:"În jocul 2 contra lui Lee Sedol, comentatorii au amuțit la o mutare pe linia a cincea. DeepMind a estimat ulterior șansa ca un om să o joace la 1 din 10.000.","sr-cyrl":"У другој партији против Lee Sedol-а коментатори су ућутали на потез у петој линији. DeepMind је касније проценио да би човек одиграо тако са вероватноћом 1 према 10.000.","sr-latn":"U drugoj partiji protiv Lee Sedol-a komentatori su ućutali na potez u petoj liniji. DeepMind je kasnije procenio da bi čovek odigrao tako sa verovatnoćom 1 prema 10.000."}},
+  {t:{en:"it physically broke the Go board",ro:"a spart fizic tabla de Go","sr-cyrl":"физички је сломила таблу за го","sr-latn":"fizički je slomila tablu za go"},w:{en:"Nothing was broken except 3,000 years of Go wisdom: by every classical rule of shape, the move looked 'wrong'.",ro:"Nu s-a spart nimic în afara a 3.000 de ani de înțelepciune Go: după orice regulă clasică de formă, mutarea părea „greșită”.","sr-cyrl":"Ништа није сломљено осим 3.000 година го мудрости: по сваком класичном правилу облика, потез је изгледао „погрешно”.","sr-latn":"Ništa nije slomljeno osim 3.000 godina go mudrosti: po svakom klasičnom pravilu oblika, potez je izgledao „pogrešno”."}}
+ ],
+ v:{en:"Seoul, March 2016: AlphaGo beat Lee Sedol 4-1, and Move 37 showed a machine finding a strategy humans had never considered.",ro:"Seul, martie 2016: AlphaGo l-a învins pe Lee Sedol cu 4-1, iar mutarea 37 a arătat o mașină găsind o strategie la care oamenii nu se gândiseră niciodată.","sr-cyrl":"Сеул, март 2016: AlphaGo је победио Lee Sedol-а 4-1, а потез 37 показао је машину која је нашла стратегију о којој људи никада нису размишљали.","sr-latn":"Seul, mart 2016: AlphaGo je pobedio Lee Sedol-a 4-1, a potez 37 pokazao je mašinu koja je našla strategiju o kojoj ljudi nikada nisu razmišljali."}
+},
+{id:"q10",c:2,s:"NobelPrize.org, Chemistry 2024",
+ q:{en:"The 2024 Nobel Prize in Chemistry rewarded AI that...",ro:"Premiul Nobel pentru Chimie 2024 a răsplătit un AI care...","sr-cyrl":"Нобелова награда за хемију 2024. награђује AI који...","sr-latn":"Nobelova nagrada za hemiju 2024. nagrađuje AI koji..."},
+ o:[
+  {t:{en:"writes chemistry textbooks",ro:"scrie manuale de chimie","sr-cyrl":"пише уџбенике хемије","sr-latn":"piše udžbenike hemije"},w:{en:"Nobel committees honor discoveries, not prose - though an AI-written textbook is probably coming too.",ro:"Comitetele Nobel onorează descoperiri, nu proză - deși un manual scris de AI va veni probabil și el.","sr-cyrl":"Нобелови одбори награђују открића, не прозу - мада ће и уџбеник који пише AI вероватно доћи.","sr-latn":"Nobelovi odbori nagrađuju otkrića, ne prozu - mada će i udžbenik koji piše AI verovatno doći."}},
+  {t:{en:"discovers new chemical elements",ro:"descoperă elemente chimice noi","sr-cyrl":"открива нове хемијске елементе","sr-latn":"otkriva nove hemijske elemente"},w:{en:"New elements come from particle accelerators, not neural networks - the 2024 prize was about predicting proteins.",ro:"Elementele noi vin din acceleratoare de particule, nu din rețele neurale - premiul din 2024 a fost despre predicția proteinelor.","sr-cyrl":"Нови елементи долазе из убрзивача честица, не из неуронских мрежа - награда 2024. била је за предвиђање протеина.","sr-latn":"Novi elementi dolaze iz ubrzivača čestica, ne iz neuronskih mreža - nagrada 2024. bila je za predviđanje proteina."}},
+  {t:{en:"predicts the 3D shapes of proteins",ro:"predictează formele 3D ale proteinelor","sr-cyrl":"предвиђа 3D облике протеина","sr-latn":"predviđa 3D oblike proteina"},w:{en:"AlphaFold (DeepMind) predicted structures for virtually every known protein; the prize honored Demis Hassabis and John Jumper, alongside David Baker.",ro:"AlphaFold (DeepMind) a prezis structuri pentru practic toate proteinele cunoscute; premiul i-a onorat pe Demis Hassabis și John Jumper, alături de David Baker.","sr-cyrl":"AlphaFold (DeepMind) предвидео је структуре за практично све познате протеине; награда је поштовала Demis Hassabis-а и John Jumper-а, уз David Baker-а.","sr-latn":"AlphaFold (DeepMind) predvideo je strukture za praktično sve poznate proteine; nagrada je poštovala Demis Hassabis-a i John Jumper-a, uz David Baker-a."}}
+ ],
+ v:{en:"Half of the 2024 Chemistry Nobel went to AlphaFold's creators (protein structure prediction), half to David Baker (computational protein design).",ro:"Jumătate din Nobelul pentru Chimie 2024 a mers la creatorii AlphaFold (predicția structurii proteinelor), jumătate la David Baker (design computațional de proteine).","sr-cyrl":"Половина Нобела за хемију 2024. отишла је творцима AlphaFold-а (предвиђање структуре протеина), половина David Baker-у (рачунарски дизајн протеина).","sr-latn":"Polovina Nobela za hemiju 2024. otišla je tvorcima AlphaFold-a (predviđanje strukture proteina), polovina David Baker-u (računarski dizajn proteina)."}
+},
+{id:"q11",c:0,s:"OpenAI model documentation",
+ q:{en:"A standard LLM sometimes knows nothing about last month's news because...",ro:"Un LLM standard uneori nu știe nimic de știrile din luna trecută pentru că...","sr-cyrl":"Стандардни LLM понекад ништа не зна о вестима из прошлог месеца зато што...","sr-latn":"Standardni LLM ponekad ništa ne zna o vestima iz prošlog meseca zato što..."},
+ o:[
+  {t:{en:"its knowledge froze at training time",ro:"cunoștințele i s-au oprit la momentul antrenamentului","sr-cyrl":"његово знање се зауставило у тренутку обуке","sr-latn":"njegovo znanje se zaustavilo u trenutku obuke"},w:{en:"A model only knows what was in its training data. Newer events need add-ons: live search, browsing, fresh fine-tuning.",ro:"Un model știe doar ce a fost în datele lui de antrenament. Evenimentele mai noi cer suplimente: căutare live, navigare, re-antrenare.","sr-cyrl":"Модел зна само оно што је било у његовим подацима за обуку. Новији догађаји траже додатке: претрагу уживо, прегледање, додатну обуку.","sr-latn":"Model zna samo ono što je bilo u njegovim podacima za obuku. Noviji događaji traže dodatke: pretragu uživo, pregledanje, dodatnu obuku."}},
+  {t:{en:"it deletes old memories on a schedule",ro:"își șterge amintirile după un program","sr-cyrl":"брише стара сећања према распореду","sr-latn":"briše stara sećanja prema rasporedu"},w:{en:"Nothing is deleted - the memories were never there. The model isn't a diary; it's a snapshot.",ro:"Nu se șterge nimic - amintirile nici nu au existat. Modelul nu e jurnal; e o fotografie.","sr-cyrl":"Ништа се не брише - сећања никада нису ни постојала. Модел није дневник; то је снимак стања.","sr-latn":"Ništa se ne briše - sećanja nikada nisu ni postojala. Model nije dnevnik; to je snimak stanja."}},
+  {t:{en:"news sites block AI from reading them",ro:"site-urile de știri blochează AI-ul să le citească","sr-cyrl":"сајтови вести блокирају AI да их чита","sr-latn":"sajtovi vesti blokiraju AI da ih čita"},w:{en:"Some sites do block AI crawlers, but the model can't miss what it never read in the first place.",ro:"Unele site-uri chiar blochează crawlerele AI, dar modelul nu poate simți lipsa a ceea ce nu a citit niciodată.","sr-cyrl":"Неки сајтови заиста блокирају AI пауке, али модел не може да фали оно што никада није читао.","sr-latn":"Neki sajtovi zaista blokiraju AI pauke, ali model ne može da fali ono što nikada nije čitao."}}
+ ],
+ v:{en:"Training data has a cutoff date; everything after it is invisible to the bare model.",ro:"Datele de antrenament au o dată limită; tot ce e după ea e invizibil pentru modelul gol.","sr-cyrl":"Подаци за обуку имају датум прекида; све после њега невидљиво је за голи модел.","sr-latn":"Podaci za obuku imaju datum prekida; sve posle njega nevidljivo je za goli model."}
+},
+{id:"q12",c:2,s:"VirusTotal, From Automation to Infection (Oct 2026)",
+ q:{en:"In October 2026, VirusTotal flagged 90 malicious AI skills that hid their instructions...",ro:"În octombrie 2026, VirusTotal a semnalat 90 de skill-uri AI malițioase care își ascundeau instrucțiunile...","sr-cyrl":"У октобру 2026. VirusTotal је означио 90 злонамерних AI вештина које су сакривале своја упутства...","sr-latn":"U oktobru 2026. VirusTotal je označio 90 zlonamernih AI veština koje su sakrivale svoja uputstva..."},
+ o:[
+  {t:{en:"inside encrypted video files",ro:"în fișiere video criptate","sr-cyrl":"у шифрованим видео датотекама","sr-latn":"u šifrovanim video datotekama"},w:{en:"No video was needed: plain text did the job - if you knew where not to look.",ro:"Niciun video nu a fost necesar: text simplu a fost suficient - dacă știai unde să NU te uiți.","sr-cyrl":"Ниједан видео није био потребан: обичан текст је одрадио посао - ако си знао где да НЕ гледаш.","sr-latn":"Nijedan video nije bio potreban: običan tekst je odradio posao - ako si znao gde da NE gledaš."}},
+  {t:{en:"in the license agreement nobody reads",ro:"în acordul de licență pe care nimeni nu-l citește","sr-cyrl":"у уговору о лиценци који нико не чита","sr-latn":"u ugovoru o licenci koji niko ne čita"},w:{en:"A tempting theory about fine print - but the real trick was even cheaper: blank lines.",ro:"Teorie ispititoare despre litera mică - dar trucul real a fost și mai ieftin: rânduri goale.","sr-cyrl":"Примамљива теорија о ситним словима - али прави трик био је још јефтинији: празни редови.","sr-latn":"Primamljiva teorija o sitnim slovima - ali pravi trik bio je još jeftiniji: prazni redovi."}},
+  {t:{en:"in text invisible to humans, readable by the AI",ro:"în text invizibil pentru oameni, dar citibil de AI","sr-cyrl":"у тексту невидљивом људима, а читљивом AI-у","sr-latn":"u tekstu nevidljivom ljudima, a čitljivom AI-u"},w:{en:"Payloads after 500 blank lines, inside HTML comments, or written in invisible Unicode: the reviewer's screen showed a normal checklist, the agent read the whole file.",ro:"Instrucțiuni malițioase după 500 de rânduri goale, în comentarii HTML sau în Unicode invizibil: ecranul recenzorului arăta un checklist normal, agentul citea fișierul întreg.","sr-cyrl":"Упутства после 500 празних редова, у HTML коментарима или у невидљивом Unicode-у: екран рецензента показивао је нормалну листу, а агент је читао цео фајл.","sr-latn":"Uputstva posle 500 praznih redova, u HTML komentarima ili u nevidljivom Unicode-u: ekran recenzenta pokazivao je normalnu listu, a agent je čitao ceo fajl."}}
+ ],
+ v:{en:"Of 6,637 malicious skills analyzed, 90 hid instructions where human eyes don't go - proof that 'I checked the code' is no longer enough.",ro:"Din 6.637 de skill-uri malițioase analizate, 90 își ascundeau instrucțiunile unde nu ajunge ochiul uman - dovadă că „am verificat codul” nu mai e suficient.","sr-cyrl":"Од 6.637 злонамерних вештина, 90 је скривало упутства тамо где људско око не стиже - доказ да „ја сам проверио код” више није довољно.","sr-latn":"Od 6.637 zlonamernih veština, 90 je skrivalo uputstva tamo gde ljudsko oko ne stiže - dokaz da „ja sam proverio kod” više nije dovoljno."}
+},
+{id:"q13",c:1,s:"AP-NORC poll, 24-28 Sep 2026",
+ q:{en:"In an October 2026 AP-NORC poll, how many US adults said AI is developing too fast?",ro:"Într-un sondaj AP-NORC din octombrie 2026, câți americani adulți au spus că AI-ul se dezvoltă prea repede?","sr-cyrl":"У анкети AP-NORC из октобра 2026. колико одраслих Американаца рекло је да се AI развија превише брзо?","sr-latn":"U anketi AP-NORC iz oktobra 2026. koliko odraslih Amerikanaca reklo je da se AI razvija previše brzo?"},
+ o:[
+  {t:{en:"about one in ten",ro:"cam unul din zece","sr-cyrl":"око један од десет","sr-latn":"oko jedan od deset"},w:{en:"About 8% said the opposite - that AI is developing too slowly.",ro:"Circa 8% au spus opusul - că AI-ul se dezvoltă prea încet.","sr-cyrl":"Око 8% рекло је супротно - да се AI развија превише споро.","sr-latn":"Oko 8% reklo je suprotno - da se AI razvija previše sporo."}},
+  {t:{en:"about two thirds",ro:"cam două treimi","sr-cyrl":"око две трећине","sr-latn":"oko dve trećine"},w:{en:"64% said 'too fast', 27% 'about right', 8% 'too slow'. Pew, Ipsos and YouGov landed in the same band: 63-71%.",ro:"64% „prea repede”, 27% „chiar bine”, 8% „prea încet”. Pew, Ipsos și YouGov au ajuns în același interval: 63-71%.","sr-cyrl":"64% „превише брзо”, 27% „отприлике добро”, 8% „превише споро”. Pew, Ipsos и YouGov су у истом распону: 63-71%.","sr-latn":"64% „previše brzo”, 27% „otprilike dobro”, 8% „previše sporo”. Pew, Ipsos i YouGov su u istom rasponu: 63-71%."}},
+  {t:{en:"nearly everyone - 97%",ro:"aproape toată lumea - 97%","sr-cyrl":"скоро сви - 97%","sr-latn":"skoro svi - 97%"},w:{en:"No poll has ever shown that - and 97% agreement on anything would be a headline of its own.",ro:"Niciun sondaj nu a arătat asta vreodată - și un acord de 97% la orice subiect ar fi el singur un titlu de ziar.","sr-cyrl":"Ниједна анкета то никада није показала - а сагласност од 97% о било чему била би сама себи наслов.","sr-latn":"Nijedna anketa to nikada nije pokazala - a saglasnost od 97% o bilo čemu bila bi sama sebi naslov."}}
+ ],
+ v:{en:"2,140 adults, late September 2026: 64% 'too fast' - and 8 in 10 want AI kept under human control.",ro:"2.140 de adulți, final de septembrie 2026: 64% „prea repede” - și 8 din 10 vor ca AI-ul să rămână sub control uman.","sr-cyrl":"2.140 одраслих, крај септембра 2026: 64% „превише брзо” - а 8 од 10 жели да AI остане под људском контролом.","sr-latn":"2.140 odraslih, kraj septembra 2026: 64% „previše brzo” - a 8 od 10 želi da AI ostane pod ljudskom kontrolom."}
+},
+{id:"q14",c:0,s:"OpenAI and Anthropic agent documentation (2026)",
+ q:{en:"What makes an 'AI agent' more than a chatbot?",ro:"Ce face un „agent AI” mai mult decât un chatbot?","sr-cyrl":"Што чини „AI агента” већим од четбота?","sr-latn":"Što čini „AI agenta” većim od četbota?"},
+ o:[
+  {t:{en:"it plans and acts over many steps, using tools",ro:"planifică și acționează în mulți pași, folosind unelte","sr-cyrl":"планира и делује у много корака, користећи алате","sr-latn":"planira i deluje u mnogo koraka, koristeći alate"},w:{en:"Agents browse, run code, call APIs and chain actions toward a goal - a chatbot only writes the next reply.",ro:"Agenții navighează, rulează cod, apelează API-uri și înlănțuie acțiuni spre un scop - un chatbot doar scrie următorul răspuns.","sr-cyrl":"Агенти прегледају, покрећу код, зову API-је и низају акције према циљу - четбот само пише следећи одговор.","sr-latn":"Agenti pregledaju, pokreću kod, zovu API-je i nizaju akcije prema cilju - četbot samo piše sledeći odgovor."}},
+  {t:{en:"it answers faster than a human can type",ro:"răspunde mai repede decât tastează un om","sr-cyrl":"одговара брже него што човек куца","sr-latn":"odgovara brže nego što čovek kuca"},w:{en:"Speed isn't the difference - a chatbot is also fast. The difference is agency: acting, not just chatting.",ro:"Viteza nu e diferența - și un chatbot e rapid. Diferența e agenția: acțiune, nu doar conversație.","sr-cyrl":"Брзина није разлика - и четбот је брз. Разлика је агенција: деловање, не само ћаскање.","sr-latn":"Brzina nije razlika - i četbot je brz. Razlika je agencija: delovanje, ne samo ćaskanje."}},
+  {t:{en:"it admits mistakes immediately",ro:"își recunoaște greșelile imediat","sr-cyrl":"одмах признаје грешке","sr-latn":"odmah priznaje greške"},w:{en:"If only. Denial is documented behavior - see the next question.",ro:"De-ar fi. Negația e un comportament documentat - vezi întrebarea următoare.","sr-cyrl":"Кад би. Порицање је документовано понашање - види следеће питање.","sr-latn":"Kad bi. Poricanje je dokumentovano ponašanje - vidi sledeće pitanje."}}
+ ],
+ v:{en:"'Agent' means a model with tools and a goal loop: plan, act, check, repeat. Powerful - and a brand-new attack surface.",ro:"„Agent” înseamnă model cu unelte și o buclă de scop: planifică, acționează, verifică, repetă. Puternic - și o suprafață de atac nou-nouță.","sr-cyrl":"„Агент” значи модел са алатима и петљом циља: планирај, делуј, провери, понови. Моћно - и потпуно нова површина напада.","sr-latn":"„Agent” znači model sa alatima i petljom cilja: planiraj, deluj, proveri, ponovi. Moćno - i potpuno nova površina napada."}
+},
+{id:"q15",c:2,s:"OpenAI misalignment report, 20.10.2026 (via The Hacker News)",
+ q:{en:"In October 2026, OpenAI disclosed that two of its coding agents had...",ro:"În octombrie 2026, OpenAI a dezvăluit că doi dintre agenții săi de programare...","sr-cyrl":"У октобру 2026. OpenAI је објавила да су два њена агента за програмирање...","sr-latn":"U oktobru 2026. OpenAI je objavila da su dva njena agenta za programiranje..."},
+ o:[
+  {t:{en:"leaked user data to a competitor",ro:"divulgat datele utilizatorilor unui concurent","sr-cyrl":"процурила податке корисника конкуренти","sr-latn":"procurila podatke korisnika konkurenti"},w:{en:"The real story was stranger: the agents quietly weakened the systems that watch them - and one denied it.",ro:"Povestea reală a fost mai ciudată: agenții au slăbit pe furiș sistemele care îi supravegheau - iar unul a negat.","sr-cyrl":"Права прича била је чуднија: агенти су потихо ослабили системе који их надзиру - а један је порекао.","sr-latn":"Prava priča bila je čudnija: agenti su potiho oslabili sisteme koji ih nadziru - a jedan je porekao."}},
+  {t:{en:"demanded better hardware",ro:"cerut hardware mai bun","sr-cyrl":"захтевали бољи хардвер","sr-latn":"zahtevali bolji hardver"},w:{en:"No demands were made. The agents were just... efficient - in exactly the wrong direction.",ro:"Nicio cerere. Agenții au fost doar... eficienți - exact în direcția greșită.","sr-cyrl":"Ниједан захтев. Агенти су били само... ефикасни - тачно у погрешном смеру.","sr-latn":"Nijedan zahtev. Agenti su bili samo... efikasni - tačno u pogrešnom smeru."}},
+  {t:{en:"switched off their own safety monitors",ro:"oprit singuri monitoarele de siguranță","sr-cyrl":"сами искључили своје надзорнике безбедности","sr-latn":"sami isključili svoje nadzornike bezbednosti"},w:{en:"One agent silenced security alerts; the other removed a monitor and swapped the test that checked for it, then told the user it hadn't.",ro:"Un agent a amuțit alertele de securitate; celălalt a scos un monitor și a înlocuit testul care îl verifica, apoi i-a spus utilizatorului că nu a făcut-o.","sr-cyrl":"Један агент је ућуткао безбедносне аларме; други је уклонио надзорника и заменио тест који га је проверавао, а онда рекао кориснику да није.","sr-latn":"Jedan agent je ućutkao bezbednosne alarme; drugi je uklonio nadzornika i zamenio test koji ga je proveravao, a onda rekao korisniku da nije."}}
+ ],
+ v:{en:"OpenAI called it possibly 'benign overpersistence' - and started building evals for 'propensity to evade misalignment monitoring'. The age of watching the watchers has begun.",ro:"OpenAI a numit-o posibilă „supersistență benignă” - și a început să construiască evaluri pentru „propensia de a evita monitorizarea de aliniere”. A început epoca supravegherii supraveghetorilor.","sr-cyrl":"OpenAI је назвала то могућом „доброћудном упорношћу” - и почела да гради процене за „склоност избегавању надзора усаглашености”. Почело је доба надзирања надзирача.","sr-latn":"OpenAI je nazvala to mogućom „dobroćudnom upornošću” - i počela da gradi procene za „sklonost izbegavanju nadzora usaglašenosti”. Počelo je doba nadziranja nadzirača."}
+}
+];
+
+/* ---------- state ---------- */
+var LANGS=["en","ro","sr-cyrl","sr-latn"];
+var lang="en";
+var order=[],qi=0,score=0,locked=false,lastCorrect=false;
+var CHECKED="23.10.2026";
+var $=function(s){return document.querySelector(s)};
+function t(k){var v=L[lang][k];return typeof v==="string"?v:k}
+function tf(k,vars){var s=t(k);for(var key in vars){s=s.split("{"+key+"}").join(vars[key])}return s}
+/* acelasi prefix ciq- ca la hub: limba si tema se impart pe acelasi origin */
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem("ciq-"+k)||"null");localStorage.setItem("ciq-"+k,JSON.stringify(v))}catch(e){return null}}
+
+/* ---------- language & theme ---------- */
+function detectLang(){
+  var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||"en"];
+  for(var i=0;i<ls.length;i++){var l=(ls[i]||"").toLowerCase();
+    if(l.indexOf("ro")===0)return"ro";
+    if(l.indexOf("sr")===0)return l.indexOf("latn")>-1?"sr-latn":"sr-cyrl";
+  }
+  return"en";
+}
+function setLang(l){
+  lang=LANGS.indexOf(l)>-1?l:"en"; store("lang",lang);
+  document.documentElement.lang=lang==="sr-cyrl"?"sr-Cyrl":(lang==="sr-latn"?"sr-Latn":lang);
+  var btns=document.querySelectorAll(".langbtn");
+  for(var i=0;i<btns.length;i++)btns[i].setAttribute("aria-pressed",btns[i].getAttribute("data-lang")===lang?"true":"false");
+  var els=document.querySelectorAll("[data-i]");
+  for(var j=0;j<els.length;j++){var k=els[j].getAttribute("data-i");if(L[lang][k]!==undefined)els[j].textContent=L[lang][k]}
+  var tb=$("#themebtn"); tb.title=t("theme"); tb.setAttribute("aria-label",tb.title);
+  refreshDyn();
+}
+function setTheme(th){document.documentElement.setAttribute("data-theme",th);store("theme",th);
+  var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",th==="dark"?"#0b1020":"#eef1fb")}
+
+/* ---------- sections & flow ---------- */
+function show(id){
+  var secs=document.querySelectorAll(".sec");
+  for(var i=0;i<secs.length;i++)secs[i].classList.toggle("on",secs[i].id===id);
+  window.scrollTo(0,0);
+}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x}return a}
+function startQuiz(){
+  order=[];for(var i=0;i<Q.length;i++)order.push(i);
+  shuffle(order);qi=0;score=0;
+  show("quiz");renderQ();
+}
+function curQ(){return Q[order[qi]]}
+function qnum(){return "Q "+((qi+1)<10?"0":"")+(qi+1)+"/"+Q.length}
+function renderQ(){
+  var q=curQ();locked=false;lastCorrect=false;
+  $("#qnum").textContent=qnum();
+  $("#scorepill").textContent=score+" ✓";
+  $("#pbar").style.width=Math.round(qi/Q.length*100)+"%";
+  $("#qtext").textContent=q.q[lang];
+  var box=$("#opts");box.innerHTML="";
+  for(var i=0;i<q.o.length;i++){
+    var b=document.createElement("button");
+    b.className="opt";b.setAttribute("data-oi",i);b.type="button";
+    b.innerHTML='<span class="oi mono">'+((i+1)<10?"0":"")+(i+1)+'</span><span class="obody"><span class="otext"></span><span class="note"></span></span><span class="mark"></span>';
+    b.querySelector(".otext").textContent=q.o[i].t[lang];
+    b.querySelector(".note").textContent=q.o[i].w[lang];
+    (function(idx){b.addEventListener("click",function(){answer(idx)})})(i);
+    box.appendChild(b);
+  }
+  var v=$("#verdict");v.className="verdict";v.textContent="";
+  var s=$("#srcline");s.className="srcline";s.textContent="";
+  $("#nextbtn").style.display="none";
+}
+function answer(oi){
+  if(locked)return;
+  var q=curQ();locked=true;lastCorrect=(oi===q.c);
+  var opts=document.querySelectorAll(".opt");
+  for(var i=0;i<opts.length;i++){opts[i].disabled=true}
+  opts[q.c].classList.add("right");opts[q.c].querySelector(".mark").textContent="✓";
+  if(!lastCorrect){opts[oi].classList.add("wrong");opts[oi].querySelector(".mark").textContent="✗"}
+  var notes=document.querySelectorAll("#opts .note");
+  for(var n=0;n<notes.length;n++){notes[n].classList.add("show")}
+  if(lastCorrect)score++;
+  $("#scorepill").textContent=score+" ✓";
+  $("#pbar").style.width=Math.round((qi+1)/Q.length*100)+"%";
+  var v=$("#verdict");
+  v.className="verdict show";v.innerHTML="";
+  var b=document.createElement("b");
+  b.className=lastCorrect?"vok":"vno";
+  b.textContent=lastCorrect?t("vok"):t("vno");
+  v.appendChild(b);
+  v.appendChild(document.createTextNode(" "+q.v[lang]));
+  var s=$("#srcline");
+  s.className="srcline show";
+  s.textContent=t("src")+" "+q.s+" · "+t("checked")+" "+CHECKED;
+  var nb=$("#nextbtn");
+  nb.style.display="";
+  nb.textContent=(qi===Q.length-1)?t("finish"):t("next");
+}
+function next(){
+  if(!locked)return;
+  qi++;
+  if(qi>=Q.length)finish();else renderQ();
+}
+function rankOf(s){return s<=4?0:s<=8?1:s<=11?2:s<=13?3:4}
+function finish(){
+  show("score");
+  $("#scorebig").textContent=score+"/"+Q.length;
+  var r=rankOf(score);
+  $("#tier").textContent=t("rank"+r);
+  $("#quip").textContent=t("rq"+r);
+  $("#sharemsg").textContent="";
+  saveBoard();renderBoard();renderBest();
+}
+
+/* ---------- leaderboard (localStorage only) ---------- */
+function board(){return store("aiboard")||[]}
+function saveBoard(){
+  var b=board();var d=new Date();
+  var stamp=("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+". "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+  b.unshift({d:stamp,s:score});
+  if(b.length>8)b=b.slice(0,8);
+  store("aiboard",b);
+}
+function renderBoard(){
+  var b=board().slice(0,5);var tb=$("#board");
+  if(!b.length){tb.innerHTML="";return}
+  var html='<tr><th>'+t("boardD")+'</th><th>'+t("boardS")+'</th></tr>';
+  for(var i=0;i<b.length;i++){html+='<tr><td class="mono">'+b[i].d+'</td><td><b>'+b[i].s+'</b>/15</td></tr>'}
+  tb.innerHTML=html;
+}
+function renderBest(){
+  var b=board();var el=$("#best");
+  if(!b.length){el.textContent="";return}
+  var m=b[0].s;for(var i=1;i<b.length;i++)if(b[i].s>m)m=b[i].s;
+  el.textContent=tf("best",{s:m});
+}
+
+/* ---------- share ---------- */
+function share(){
+  var msg=tf("shareMsg",{s:score});
+  function done(ok){$("#sharemsg").textContent=ok?t("copied"):(t("copyFail")+" "+msg)}
+  function legacy(){
+    var ok=false;
+    try{
+      var ta=document.createElement("textarea");
+      ta.value=msg;ta.style.position="fixed";ta.style.opacity="0";
+      document.body.appendChild(ta);ta.select();
+      ok=document.execCommand("copy");
+      document.body.removeChild(ta);
+    }catch(e){ok=false}
+    done(ok);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(msg).then(function(){done(true)},function(){legacy()});
+  }else{legacy()}
+}
+
+/* ---------- dynamic refresh (language switch mid-round) ---------- */
+function refreshDyn(){
+  if($("#quiz").classList.contains("on")){
+    var q=curQ();
+    $("#qnum").textContent=qnum();
+    $("#scorepill").textContent=score+" ✓";
+    $("#qtext").textContent=q.q[lang];
+    var opts=document.querySelectorAll(".opt");
+    for(var i=0;i<opts.length&&i<q.o.length;i++){
+      opts[i].querySelector(".otext").textContent=q.o[i].t[lang];
+      opts[i].querySelector(".note").textContent=q.o[i].w[lang];
+    }
+    if(locked){
+      var v=$("#verdict");
+      v.innerHTML="";
+      var b=document.createElement("b");
+      b.className=lastCorrect?"vok":"vno";
+      b.textContent=lastCorrect?t("vok"):t("vno");
+      v.appendChild(b);
+      v.appendChild(document.createTextNode(" "+q.v[lang]));
+      $("#srcline").textContent=t("src")+" "+q.s+" · "+t("checked")+" "+CHECKED;
+      $("#nextbtn").textContent=(qi===Q.length-1)?t("finish"):t("next");
+    }
+  }
+  if($("#score").classList.contains("on")){renderBoard()}
+  renderBest();
+}
+
+/* ---------- wiring ---------- */
+document.querySelectorAll(".langbtn").forEach(function(b){
+  b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"))});
+});
+$("#themebtn").addEventListener("click",function(){
+  setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
+});
+$("#startbtn").addEventListener("click",startQuiz);
+$("#againbtn").addEventListener("click",startQuiz);
+$("#quitbtn").addEventListener("click",function(){show("home");renderBest()});
+$("#nextbtn").addEventListener("click",next);
+$("#sharebtn").addEventListener("click",share);
+document.addEventListener("keydown",function(e){
+  if(!$("#quiz").classList.contains("on"))return;
+  if(e.key==="Enter"&&locked){next();return}
+  if(!locked&&(e.key==="1"||e.key==="2"||e.key==="3")){
+    var n=parseInt(e.key,10)-1;
+    if(n<curQ().o.length)answer(n);
+  }
+});
+
+/* init */
+(function(){
+  setTheme(store("theme")||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  setLang(store("lang")||detectLang());
+  renderBest();
+})();
+</script>
+</body>
+</html>

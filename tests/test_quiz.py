@@ -4,8 +4,11 @@ Folosire: python3 test_quiz.py [cale/către/index.html]
 Cerințe: playwright + chromium (pip install playwright && python3 -m playwright install chromium)
 Ieșire: „TOATE TESTELE AU TRECUT" + exit 0, sau prima eroare + exit 1.
 v4: + legătura Home spre hub (href ../ + eticheta tradusă în 4 limbi).
+v5: generică pentru ORICE quiz - titlurile h1 se citesc din L (fără hardcodare),
+    theme-color se validează ca hex + schimbare la comutarea temei (paletă liberă).
 """
 import os
+import re
 import sys
 from playwright.sync_api import sync_playwright
 
@@ -27,19 +30,23 @@ with sync_playwright() as p:
 
     print("[1] Limbi")
     check(pg.get_attribute(".homelink", "href") == "../", "legătura Home duce la hub (../)")
-    for lang, h1, home in [("en", "Celebrity IQ Test", "Home"), ("ro", "Testul vedetelor", "Acasă"),
-                     ("sr-cyrl", "Квиз о славнима", "Почетна"), ("sr-latn", "Kviz o slavnima", "Početna")]:
+    for lang, home in [("en", "Home"), ("ro", "Acasă"),
+                     ("sr-cyrl", "Почетна"), ("sr-latn", "Početna")]:
         pg.click(f'.langbtn[data-lang="{lang}"]'); pg.wait_for_timeout(120)
+        h1 = pg.evaluate("L[lang].h1")
+        check(len(h1) > 3, f"L[{lang}].h1 definit")
         check(h1 in pg.text_content("h1"), f"h1 tradus ({lang})")
         check(pg.text_content(".homelink span").strip() == home, f"eticheta Home tradusă ({lang})")
-        check(pg.evaluate("L[lang].h1.length > 3"), f"locale {lang} încărcat")
 
     print("[2] Temă")
+    th0 = pg.evaluate("document.documentElement.getAttribute('data-theme')")
+    tc0 = pg.evaluate("document.querySelector('meta[name=theme-color]').content")
     pg.click("#themebtn"); pg.wait_for_timeout(120)
     th = pg.evaluate("document.documentElement.getAttribute('data-theme')")
-    check(th in ("light", "dark"), "tema comutată")
+    check(th in ("light", "dark") and th != th0, "tema comutată")
     tc = pg.evaluate("document.querySelector('meta[name=theme-color]').content")
-    check(tc == ("#131020" if th == "dark" else "#f6f3ec"), "theme-color sincronizat")
+    check(re.match(r"^#[0-9a-fA-F]{6}$", tc), "theme-color este hex valid")
+    check(tc != tc0, "theme-color sincronizat cu noua temă")
     pg.reload(); pg.wait_for_timeout(300)
     check(pg.evaluate("document.documentElement.getAttribute('data-theme')") == th, "tema persistă după reload")
 
@@ -50,7 +57,8 @@ with sync_playwright() as p:
         idx = pg.evaluate("""() => {
             const q = Q[order[qi]];
             return [...document.querySelectorAll('.opt')].findIndex(b => +b.dataset.oi === q.c);
-        }""")
+        }"""
+        )
         pg.click(f".opt >> nth={idx}"); pg.wait_for_timeout(90)
         check(pg.evaluate("locked"), f"q{i+1} blocat după răspuns")
         check(pg.evaluate("[...document.querySelectorAll('.opt .mark')].some(m => m.textContent === '\\u2713')"),
@@ -70,7 +78,8 @@ with sync_playwright() as p:
     idx = pg.evaluate("""() => {
         const q = Q[order[qi]];
         return ([...document.querySelectorAll('.opt')].findIndex(b => +b.dataset.oi === q.c) + 1) % 3;
-    }""")
+    }"""
+    )
     pg.click(f".opt >> nth={idx}"); pg.wait_for_timeout(120)
     check(len(pg.text_content("#verdict")) > 3, "verdict afișat")
     src = pg.evaluate("document.getElementById('srcline').textContent")

@@ -16,6 +16,11 @@ No account, no upload, no tracking, no advertising. One HTML file per quiz, and 
 | Quiz | Questions | Languages |
 | --- | --- | --- |
 | [Celebrity IQ Test](celebrity-iq-test/) | 15 | English, Romanian, Serbian Cyrillic, Serbian Latin |
+| [The AI IQ Test](ai-iq-test/) | 15 | English, Romanian, Serbian Cyrillic, Serbian Latin |
+
+![The AI IQ Test on a desktop](screenshots/ai-quiz-desktop.png)
+
+The second quiz rides the AI wave: fifteen questions from Turing's 1950 paper to the coding agents that switched off their own safety monitors in October 2026 - every fact sourced and dated.
 
 ## What every quiz here guarantees
 
@@ -38,10 +43,12 @@ Both live on the same origin, so they share one `localStorage` key. Choose Roman
 ## Tests
 
 ```bash
-node tests/check_sr.js index.html                     # the hub: 18 Serbian pairs
-node tests/check_sr.js celebrity-iq-test/index.html   # the quiz: 156 Serbian pairs
+node tests/check_sr.js index.html                     # the hub: 20 Serbian pairs
+node tests/check_sr.js celebrity-iq-test/index.html   # Celebrity: 156 Serbian pairs
+node tests/check_sr.js ai-iq-test/index.html          # AI: 146 Serbian pairs
 python3 tests/test_quiz.py celebrity-iq-test/index.html
-python3 tests/test_hub.py index.html celebrity-iq-test/index.html
+python3 tests/test_quiz.py ai-iq-test/index.html
+python3 tests/test_hub.py index.html ai-iq-test/index.html
 ```
 
 `check_sr.js` transliterates the Serbian Cyrillic of every string into Latin and compares it with the Latin text written by hand; any drift, any stray Cyrillic letter in the Latin text, or a Latin paste in the Cyrillic one stops the check.
