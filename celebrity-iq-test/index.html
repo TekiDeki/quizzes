@@ -163,6 +163,8 @@ footer .sep{margin:0 7px;opacity:.45}
 .kbd{font-size:.76rem;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-weight:700}
 .confetti{position:fixed;top:-14px;z-index:99;pointer-events:none;border-radius:2px}
 </style>
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 </head>
 <body>
 <div class="wrap">
@@ -710,6 +712,14 @@ L["sr-cyrl"].theme="Промени тему";L["sr-latn"].theme="Promeni temu";
   setTheme(store("theme")||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
   setLang(store("lang")||detectLang());
 })();
+</script>
+<script>
+/* Regula casei: PWA pe mobil. Codul service workerului sta in sw.js, nu aici. */
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("../sw.js").catch(function () {});
+  });
+}
 </script>
 </body>
 </html>
