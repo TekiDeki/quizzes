@@ -9,7 +9,7 @@
 
 This repository holds the hub and the quizzes. The hub lists what is ready to play; every quiz is a single HTML file that runs entirely in the browser, served from the hub's own address, so the language and the theme chosen on the hub carry into the quiz.
 
-No account, no upload, no tracking, no advertising. One HTML file per quiz, and it works offline.
+No account, no upload, no tracking, no advertising. One HTML file per quiz.
 
 ## What is here
 
@@ -31,8 +31,8 @@ The second quiz rides the AI wave: fifteen questions from Turing's 1950 paper to
 
 ![An answered question, with the explanations and the source](screenshots/quiz-explained.png)
 
-- **One file, zero dependencies.** No build, no CDN, no fonts fetched from elsewhere. Saved locally, the quiz opens and works offline.
-- **A quiet support line.** Free, and it stays free; a single discreet link in the footer.
+- **One file, zero dependencies.** No build, no CDN, no fonts fetched from elsewhere. Saved locally, the quiz opens from the file itself.
+- **A quiet support line.** Free; a single discreet link in the footer.
 
 ## How the hub and the quizzes cooperate
 
@@ -65,4 +65,4 @@ The browser suites play the quiz and the hub in Chromium: a full 15/15 round wit
 
 Apache 2.0. The questions are written for this project; the sources named next to them belong to their authors.
 
-Every tool here is free and stays free, with no account, no ads and no tracking. If you want to support the work, [paypal.me/TekiDeki](https://paypal.me/TekiDeki) is in the footer of every page.
+Every tool here is free, with no account, no ads and no tracking. If you want to support the work, [paypal.me/TekiDeki](https://paypal.me/TekiDeki) is in the footer of every page.
