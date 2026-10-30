@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob: data:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<!-- CSP prin meta: GitHub Pages nu permite antete HTTP. Fara frame-ancestors/form-action, pe care meta nu le accepta. -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>quiz.freehtml.dev · free quizzes, checked answers</title>
 <meta name="description" content="Short, honest quizzes about film, music, sport, internet culture and the age of AI. Every answer explained, every fact with a source and the date it was checked. No account, no ads, no tracking.">
