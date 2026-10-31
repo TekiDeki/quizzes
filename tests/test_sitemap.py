@@ -41,9 +41,16 @@ def check(cond, mesaj):
         print("  RAU  " + mesaj)
 
 
+# Cloudflare raspunde 403 la agentul implicit al lui urllib ("Python-urllib/3.x"),
+# deci un test care nu isi declara un User-Agent normal raporteaza esec acolo unde
+# un browser primeste 200. Verificat pe viu pe 31.10.2026: curl 200, urllib 403.
+AGENT = "Mozilla/5.0 (compatible; TekiDeki-sitemap-test/1.0; +https://quiz.freehtml.dev/)"
+
+
 def cod(url):
+    cerere = urllib.request.Request(url, headers={"User-Agent": AGENT})
     try:
-        with urllib.request.urlopen(url, timeout=20) as r:
+        with urllib.request.urlopen(cerere, timeout=20) as r:
             return r.status, r.read()
     except urllib.error.HTTPError as e:
         return e.code, b""
