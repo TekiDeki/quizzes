@@ -1,0 +1,4 @@
+# Search Console cere numele exact al fisierului, iar Cloudflare Pages raspunde 307
+# catre calea fara extensie pentru orice .html. Un rewrite 200 serveste tokenul la
+# adresa exacta, fara redirect. Aceeasi solutie ca pe games.freehtml.dev.
+/googlee27c9c9c38210b47.html  /verify-token.txt  200
