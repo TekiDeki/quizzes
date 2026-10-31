@@ -1,9 +1,15 @@
 # Cloudflare Pages - antete de raspuns
-# Aliniat cu TekiDeki si Games (31.10.2026). HSTS se trimite si pe 404 si pe redirectari.
-# Nu se pune Content-Security-Policy aici: paginile nu incarca nimic din exterior, dar
-# CSP-ul ar taia si beacon-ul de analytics injectat de Cloudflare la margine - decizie separata.
+# Aliniat cu TekiDeki si Games (31.10.2026): HSTS, nosniff, Referrer-Policy.
+#
+# CSP-ul e identic, litera cu litera, cu cel din <meta> al paginilor quiz - o politica deja
+# in productie. Diferenta e ca un antet se aplica si pe 404 si pe redirectari, unde <meta> nu
+# ajunge niciodata.
+#   worker-src 'self' blob:  - cerut de tests/test_pwa.py: fara el, service workerul nu se instaleaza
+#   connect-src 'self'       - la fel: descarcarea shell-ului pentru offline
+#   script-src 'unsafe-inline' - paginile au scripturile inline, nu exista build
 
 /*
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob: data:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; upgrade-insecure-requests
