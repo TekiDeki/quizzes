@@ -80,7 +80,9 @@ with sync_playwright() as p:
     check("Quiz-uri gratuite" in pg.text_content("h1"), "hub rămâne în română la întoarcere")
 
     print("[5] Linkuri subsol")
-    for href in ["https://PayPal.me/TekiDeki", "https://github.com/TekiDeki", "https://freehtml.dev"]:
+    # R6: linkul de sprijin e EXACT https://paypal.me/TekiDeki (litera mica). Testul cerea
+    # varianta cu P mare, adica exact ce a fost scos la tura 212 - de aceea pica dupa corectie.
+    for href in ["https://paypal.me/TekiDeki", "https://github.com/TekiDeki", "https://freehtml.dev"]:
         a = pg.query_selector(f'footer a[href="{href}"]')
         check(a is not None, f"link subsol prezent: {href}")
         if a:
