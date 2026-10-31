@@ -1,0 +1,9 @@
+# Cloudflare Pages - antete de raspuns
+# Aliniat cu TekiDeki si Games (31.10.2026). HSTS se trimite si pe 404 si pe redirectari.
+# Nu se pune Content-Security-Policy aici: paginile nu incarca nimic din exterior, dar
+# CSP-ul ar taia si beacon-ul de analytics injectat de Cloudflare la margine - decizie separata.
+
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
